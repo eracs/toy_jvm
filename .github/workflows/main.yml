@@ -27,7 +27,9 @@ jobs:
         with:
           xmake-version: latest
 
-
+      - name: install vcpkg package
+        run: |
+          vcpkg install kubazip
 
       - name: build
         run: xmake
