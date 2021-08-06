@@ -1,19 +1,22 @@
 #include <iostream>
 #include "zip/unzip_entry.h"
+#include "start/start_args.h"
+#include <cstdlib>
+
 using namespace std;
 
 int main(int argc, char **argv)
 {
-    cout << "hello world!" << endl;
-    // kubazip demo
-    // size_t length;
-    // auto buf = readZipEntry("./foo.zip", "foo-1.txt", length);
+    auto args = parseArgs(argc, argv);
+    cout << "JAVA_HOME:" << args->javaHome << endl;
+    cout << "CLASS_PATH:" << args->classpath << endl;
+    cout << "SHOW_VESION:" << args->versionFlag << endl;
+    cout << "SHOW_HELP:" << args->helpFlag << endl;
+    cout << "---next jvm:" << args->args.size() << " counts options---" << endl;
+    for (auto const &item : args->args)
+    {
+        cout << item << endl;
+    }
 
-    // std::cout << length << std::endl;
-    // for (int i = 0; i < length; i++)
-    // {
-    //     std::cout << buf[i] - 0 << buf[i] << std::endl;
-    // }
-    // free(buf);
     return 0;
 }

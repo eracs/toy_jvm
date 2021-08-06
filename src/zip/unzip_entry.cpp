@@ -31,3 +31,14 @@ size_t strlenZipEntry(uint8 *data)
 {
     return strlen(reinterpret_cast<const char *>(data));
 }
+
+// kubazip demo
+// size_t length;
+// auto buf = readZipEntry("./foo.zip", "foo-1.txt", length);
+
+// std::cout << length << std::endl;
+// for (int i = 0; i < length; i++)
+// {
+//     std::cout << buf[i] - 0 << buf[i] << std::endl;
+// }
+// free(buf);
