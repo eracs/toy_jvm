@@ -33,5 +33,5 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: toy_jvm.exe
+          name: toy_jvm_x64_release.exe
           path: build\windows\x64\release\toy_jvm.exe
