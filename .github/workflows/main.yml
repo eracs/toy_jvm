@@ -34,6 +34,7 @@ jobs:
         uses: lukka/run-vcpkg@v7.4
         with:
           setupOnly : true
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
       # Runs a set of commands using the runners shell
       - name: build
         run: xmake
