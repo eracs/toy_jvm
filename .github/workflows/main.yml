@@ -35,6 +35,7 @@ jobs:
         with:
           setupOnly : true
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          vcpkgGitCommitId: '5568f11'
       # Runs a set of commands using the runners shell
       - name: build
         run: xmake
