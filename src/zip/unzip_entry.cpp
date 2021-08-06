@@ -7,7 +7,7 @@ extern "C"
 
 using uint8 = unsigned char;
 
-uint8 *readZipEntry(const char *fileName, const char *entryName)
+uint8 *readZipEntry(const char *fileName, const char *entryName, size_t &dataSize)
 {
     uint8 *buf;
     size_t bufsize;
@@ -23,6 +23,7 @@ uint8 *readZipEntry(const char *fileName, const char *entryName)
         zip_entry_close(zip);
     }
     zip_close(zip);
+    dataSize = bufsize;
     return buf;
 }
 
