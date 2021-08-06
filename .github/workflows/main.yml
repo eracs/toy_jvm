@@ -21,18 +21,17 @@ jobs:
           vcpkgGitCommitId: "5568f110b509a9fd90711978a7cb76bae75bb092"
 
       - name: set vcpkg
-        run: "vcpkg integrate install"
+        run: vcpkg integrate install
+
       - name: setup xmake
         uses: xmake-io/github-action-setup-xmake@v1.0.12
         with:
           xmake-version: latest
 
-      - name: install vcpkg package
+      - name: set xmake and vcpkg
         run: |
-          vcpkg install kubazip
-
+          'echo env:VCPKG_ROOT'
+          
       - name: build
         run: |
-          echo $VCPKG_ROOT
-          xmake f --vcpkg=$VCPKG_ROOT
           xmake
