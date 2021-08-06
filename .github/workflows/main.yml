@@ -36,6 +36,8 @@ jobs:
           setupOnly : true
           vcpkgDirectory: '${{ github.workspace }}/vcpkg'
           vcpkgGitCommitId: '5568f110b509a9fd90711978a7cb76bae75bb092'
+      - name: set-vcpkg
+        run: $VCPKG_ROOT/vcpkg integrate install
       # Runs a set of commands using the runners shell
       - name: build
         run: xmake
