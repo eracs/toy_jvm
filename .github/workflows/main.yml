@@ -38,8 +38,9 @@ jobs:
           vcpkgGitCommitId: '5568f110b509a9fd90711978a7cb76bae75bb092'
       - name: test-vcpkg
         run: ls ${{ github.workspace }}
-      - name: set-vcpkg
-        run: 'vcpkg integrate install'
-      # Runs a set of commands using the runners shell
       - name: build
-        run: xmake
+        run: |
+          'vcpkg integrate install'
+          xmake
+      # Runs a set of commands using the runners shell
+  
