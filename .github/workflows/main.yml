@@ -1,38 +1,33 @@
 name: CI
 
 on:
-
   push:
     branches: [master]
   pull_request:
     branches: [master]
 
-  
   workflow_dispatch:
 
-
 jobs:
-
   build:
-
     runs-on: windows-latest
     steps:
-     
       - uses: actions/checkout@v2
-      
+
       - name: run-vcpkg
         uses: lukka/run-vcpkg@v7.4
         with:
           setupOnly: true
-          vcpkgDirectory: "${{ github.workspace }}/vcpkg"
           vcpkgGitCommitId: "5568f110b509a9fd90711978a7cb76bae75bb092"
+
+      - name: set vcpkg
+        run: "vcpkg integrate install"
       - name: setup xmake
         uses: xmake-io/github-action-setup-xmake@v1.0.12
         with:
           xmake-version: latest
 
-      - name: install package
-        run: ls ${{ github.workspace }}
+
+
       - name: build
         run: xmake
-
