@@ -30,7 +30,8 @@ jobs:
         uses: xmake-io/github-action-setup-xmake@v1.0.12
         with:
           xmake-version: latest
-
+      - name: run-vcpkg
+        uses: lukka/run-vcpkg@v7.4
       # Runs a set of commands using the runners shell
       - name: build
         run: xmake
