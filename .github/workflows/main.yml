@@ -20,18 +20,12 @@ jobs:
           setupOnly: true
           vcpkgGitCommitId: "5568f110b509a9fd90711978a7cb76bae75bb092"
 
-      - name: set vcpkg
-        run: vcpkg integrate install
-
       - name: setup xmake
         uses: xmake-io/github-action-setup-xmake@v1.0.12
         with:
           xmake-version: latest
 
       - name: set xmake and vcpkg
-        run: |
-          'echo env:VCPKG_ROOT'
-          
+        run: xmake g --vcpkg=${{env.VCPKG_ROOT}}
       - name: build
-        run: |
-          xmake
+        run: xmake
