@@ -32,4 +32,7 @@ jobs:
           vcpkg install kubazip
 
       - name: build
-        run: xmake
+        run: |
+          echo $VCPKG_ROOT
+          xmake f --vcpkg=$VCPKG_ROOT
+          xmake
