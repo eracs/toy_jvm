@@ -30,3 +30,8 @@ jobs:
         run: xmake require -y
       - name: build
         run: xmake build -y
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: toy_jvm.exe
+          path: build\windows\x64\release\toy_jvm.exe
