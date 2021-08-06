@@ -35,11 +35,11 @@
 - [ ] GC
 - [ ] 多线程
 ## 参考资料
-[《Java虚拟机规范（Java SE 8版）》](https://book.douban.com/subject/26418340/)
-[《自己动手写Java虚拟机》](https://book.douban.com/subject/26802084/)
-[《深入理解Java虚拟机（第三版）》](https://book.douban.com/subject/34907497/)
-[《揭秘Java虚拟机》](https://book.douban.com/subject/27086821/)
-[《垃圾回收的算法与实现》](https://book.douban.com/subject/26821357/)
-[《垃圾回收算法手册：自动内存管理的艺术》](https://book.douban.com/subject/26740958/)
+- [《Java虚拟机规范（Java SE 8版）》](https://book.douban.com/subject/26418340/)
+- [《自己动手写Java虚拟机》](https://book.douban.com/subject/26802084/)
+- [《深入理解Java虚拟机（第三版）》](https://book.douban.com/subject/34907497/)
+- [《揭秘Java虚拟机》](https://book.douban.com/subject/27086821/)
+- [《垃圾回收的算法与实现》](https://book.douban.com/subject/26821357/)
+- [《垃圾回收算法手册：自动内存管理的艺术》](https://book.douban.com/subject/26740958/)
 
 
