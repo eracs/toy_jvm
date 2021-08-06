@@ -24,7 +24,9 @@ jobs:
         uses: xmake-io/github-action-setup-xmake@v1.0.12
         with:
           xmake-version: latest
-
+      - name: install vcpkg packages
+        run: |
+          vcpkg install kubazip
       - name: set xmake and vcpkg
         run: xmake g --vcpkg=${{env.VCPKG_ROOT}}
       - name: build
