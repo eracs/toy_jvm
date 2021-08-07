@@ -4,8 +4,10 @@ add_requires("vcpkg::kubazip", {alias = "kubazip"})
 target("toy_jvm")
     set_kind("binary")
     add_files("src/*.cpp")
-    add_files("src/zip/*.cpp")
+    add_files("src/test/test.cpp")
+    add_files("src/file_reader/*.cpp")
     add_files("src/start/*.cpp")
+    add_files("src/classpath/*.cpp")
     add_packages("kubazip")
 
 --

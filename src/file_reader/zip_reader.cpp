@@ -1,4 +1,4 @@
-#include "unzip_entry.h"
+#include "zip_reader.h"
 
 extern "C"
 {
