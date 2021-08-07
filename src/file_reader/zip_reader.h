@@ -5,4 +5,5 @@
 
 unsigned char *readZipEntry(const char *fileName, const char *entryName, size_t &dataSize);
 
+unsigned char *readFileEntry(const char *fileName, size_t &dataSize);
 #endif

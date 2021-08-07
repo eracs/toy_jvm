@@ -1,10 +1,11 @@
 #include "zip_reader.h"
-
+#include <fstream>
 extern "C"
 {
 #include "kubazip/zip/zip.h"
 }
 
+using namespace std;
 using uint8 = unsigned char;
 
 uint8 *readZipEntry(const char *fileName, const char *entryName, size_t &dataSize)
@@ -27,9 +28,30 @@ uint8 *readZipEntry(const char *fileName, const char *entryName, size_t &dataSiz
     return buf;
 }
 
-size_t strlenZipEntry(uint8 *data)
+uint8 *readFileEntry(const char *fileName, size_t &dataSize)
 {
-    return strlen(reinterpret_cast<const char *>(data));
+    size_t size;
+    char *buffer;
+    ifstream filestr(fileName, ios::binary);
+    if (!filestr)
+    {
+        dataSize = 0;
+        return nullptr;
+    }
+    auto pbuf = filestr.rdbuf();
+    size = pbuf->pubseekoff(0, ios::end, ios::in);
+    pbuf->pubseekpos(0, ios::in);
+    buffer = new char[size];
+    pbuf->sgetn(buffer, size);
+    dataSize = size;
+    auto *result = new uint8[size];
+    for (size_t i = 0; i <= size; i++)
+    {
+        result[i] = buffer[i];
+    }
+    filestr.close();
+    free(buffer);
+    return result;
 }
 
 // kubazip demo
