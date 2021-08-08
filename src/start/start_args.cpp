@@ -3,7 +3,6 @@
 //
 
 #include "start_args.h"
-#include <cstdlib>
 #include <iostream>
 #include "clara.hpp"
 
@@ -44,12 +43,12 @@ StartArgs *parseArgs(int argc, char *argv[])
     bool help = false;
     bool version = false;
     std::string classpath;
-    std::string jre;
+    std::string jrepath;
     std::string args;
     auto helpParse = Help(help);
     auto versionParse = Opt(version)["-v"]["--version"]("Show the version.");
-    auto classpathParse = Opt(classpath, "CLASSPATH")["-cp"]["--classpath"]("Set the classpath");
-    auto jreParse = Opt(jre, "JAVA_HOME/jre")["-jre"]["--xjre"]("Set the jre path,default is %JAVA_HOME%/jre");
+    auto pathParse = Opt(classpath, "CLASSPATH")["-cp"]["--classpath"]("Set the classpath") |
+                     Opt(jrepath, "JAVA_RUNTIME")["-jre"]["--xjre"]("Set the jre path,could be JAVA_HOME/jre");
     auto argsParse = Opt(args, "args")["-args"]["--command"]("The command is forwarded to the program(public static void main(String[] args))");
     if (helpParse.parse(Args(argc, argv)))
     {
@@ -64,14 +63,11 @@ StartArgs *parseArgs(int argc, char *argv[])
             {
                 printHelpInfo(v.left, v.right);
             }
-            for (auto v : classpathParse.getHelpColumns())
+            for (auto v : pathParse.getHelpColumns())
             {
                 printHelpInfo(v.left, v.right);
             }
-            for (auto v : jreParse.getHelpColumns())
-            {
-                printHelpInfo(v.left, v.right);
-            }
+
             for (auto v : argsParse.getHelpColumns())
             {
                 printHelpInfo(v.left, v.right);
@@ -89,35 +85,20 @@ StartArgs *parseArgs(int argc, char *argv[])
     }
     auto startArgs = new StartArgs;
 
-    if (classpathParse.parse(Args(argc, argv)))
+    if (pathParse.parse(Args(argc, argv)))
     {
     }
     else
     {
         classpath = "";
-    }
-    if (jreParse.parse(Args(argc, argv)))
-    {
-    }
-    else
-    {
-        auto javaHome = getenv("JAVA_HOME");
-        if (javaHome)
-        {
-            jre += javaHome;
-            jre += "/lib";
-        }
-        else
-        {
-            jre = "";
-        }
+        jrepath = "";
     }
     if (classpath == "")
     {
         cout << "The classpath cannot be empty" << endl;
         return nullptr;
     }
-    if (jre == "")
+    if (jrepath == "")
     {
         cout << "The jre path cannot be empty" << endl;
         return nullptr;
@@ -130,7 +111,7 @@ StartArgs *parseArgs(int argc, char *argv[])
         args = "";
     }
     startArgs->classpath = classpath;
-    startArgs->jre = jre;
+    startArgs->jre = jrepath;
     startArgs->command = args;
     return startArgs;
 }
