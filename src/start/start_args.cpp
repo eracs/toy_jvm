@@ -46,10 +46,10 @@ StartArgs *parseArgs(int argc, char *argv[])
     std::string jrepath;
     std::string args;
     auto helpParse = Help(help);
-    auto versionParse = Opt(version)["-v"]["--version"]("Show the version.");
-    auto pathParse = Opt(classpath, "CLASSPATH")["-cp"]["--classpath"]("Set the classpath") |
-                     Opt(jrepath, "JAVA_RUNTIME")["-jre"]["--xjre"]("Set the jre path,could be JAVA_HOME/jre");
-    auto argsParse = Opt(args, "args")["-args"]["--command"]("The command is forwarded to the program(public static void main(String[] args))");
+    auto versionParse = Opt(version)["-v"]["--v"]["--version"]("Show the version.");
+    auto pathParse = Opt(classpath, "CLASSPATH")["-cp"]["--cp"]["--classpath"]("Set the classpath") |
+                     Opt(jrepath, "JAVA_RUNTIME")["-jre"]["--jre"]["--xjre"]("Set the jre path,could be JAVA_HOME/jre");
+    auto argsParse = Opt(args, "args")["-args"]["--args"]["--command"]("The command is forwarded to the program(public static void main(String[] args))");
     if (helpParse.parse(Args(argc, argv)))
     {
         if (help)
