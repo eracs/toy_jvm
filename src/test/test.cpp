@@ -1,6 +1,6 @@
 #include "test.h"
 #include "../start/start_args.h"
-#include "../file_reader/zip_reader.h"
+#include "../file_reader/file_reader.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "zip_reader.h"
+#include "file_reader.h"
 #include <fstream>
 extern "C"
 {
