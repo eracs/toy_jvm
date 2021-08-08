@@ -1,5 +1,6 @@
 add_rules("mode.debug", "mode.release")
 add_requires("vcpkg::kubazip", {alias = "kubazip"})
+add_requires("clara")
 
 target("toy_jvm")
     set_kind("binary")
@@ -9,6 +10,7 @@ target("toy_jvm")
     add_files("src/start/*.cpp")
     add_files("src/classpath/*.cpp")
     add_packages("kubazip")
+    add_packages("clara")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

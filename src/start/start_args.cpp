@@ -5,7 +5,8 @@
 #include "start_args.h"
 #include <cstdlib>
 #include <iostream>
-#include "../clara/clara.hpp"
+#include "clara.hpp"
+
 using namespace std;
 using namespace clara;
 
