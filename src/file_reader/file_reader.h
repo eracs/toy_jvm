@@ -1,9 +1,9 @@
+#ifndef TOY_JVM_ZIP_READER_H
+#define TOY_JVM_ZIP_READER_H
+
 #include <vector>
 #include <string>
 #include <unordered_map>
-
-#ifndef TOY_JVM_ZIP_READER_H
-#define TOY_JVM_ZIP_READER_H
 
 unsigned char *readZipEntry(const char *fileName, const char *entryName, size_t &dataSize);
 
