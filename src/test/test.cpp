@@ -11,7 +11,7 @@ void run_test(int argc, char *argv[])
     // test_search_zip_entry();
     // cout << "test_read_file" << endl;
     // test_search_file_entry();
-    test_list_file(argc, argv);
+    // test_list_file(argc, argv);
 }
 
 void test_list_file(int argc, char *argv[])
