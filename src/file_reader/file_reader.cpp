@@ -1,8 +1,11 @@
 #include "file_reader.h"
 #include <fstream>
+#include <string>
+
 extern "C"
 {
 #include "kubazip/zip/zip.h"
+#include "tinydir.h"
 }
 
 using namespace std;
@@ -54,13 +57,45 @@ uint8 *readFileEntry(const char *fileName, size_t &dataSize)
     return result;
 }
 
-// kubazip demo
-// size_t length;
-// auto buf = readZipEntry("./foo.zip", "foo-1.txt", length);
+bool isDir(const char *path)
+{
+    tinydir_file file;
+    if (tinydir_file_open(&file, path) < 0)
+    {
+        return false;
+    }
 
-// std::cout << length << std::endl;
-// for (int i = 0; i < length; i++)
-// {
-//     std::cout << buf[i] - 0 << buf[i] << std::endl;
-// }
-// free(buf);
+    return file.is_dir;
+}
+
+void listDirFiles(const char *path, unordered_map<string, string> &childFiles, vector<string> &childDirs)
+{
+    tinydir_dir dir;
+    if (tinydir_open(&dir, path) < 0)
+    {
+        return;
+    }
+    while (dir.has_next)
+    {
+        tinydir_file file;
+        tinydir_readfile(&dir, &file);
+        string fileName = file.name;
+        if (file.is_dir)
+        {
+            if (fileName == "." || fileName == "..")
+            {
+            }
+            else
+            {
+                childDirs.push_back(fileName);
+            }
+        }
+        else
+        {
+            string fileExt = file.extension;
+            childFiles.insert({fileName, fileExt});
+        }
+        tinydir_next(&dir);
+    }
+    tinydir_close(&dir);
+}
