@@ -5,12 +5,12 @@
 #include <string>
 #include <unordered_map>
 
-unsigned char *readZipEntry(const char *fileName, const char *entryName, size_t &dataSize);
+unsigned char *readZipEntry(std::string fileName, std::string entryName, size_t &dataSize);
 
-unsigned char *readFileEntry(const char *fileName, size_t &dataSize);
+unsigned char *readFileEntry(std::string fileName, size_t &dataSize);
 
-bool isDir(const char *path);
+bool isDir(std::string path);
 
-void listDirFiles(const char *path, std::unordered_map<std::string, std::string> &childFiles, std::vector<std::string> &childDirs);
+void listDirFiles(std::string path, std::unordered_map<std::string, std::string> &childFiles, std::vector<std::string> &childDirs);
 
 #endif

@@ -30,7 +30,7 @@ void test_list_file(int argc, char *argv[])
     vector<string> dirs;
     unordered_map<string, string> files;
 
-    listDirFiles(args->jre.c_str(), files, dirs);
+    listDirFiles(args->jre, files, dirs);
     cout << "dirs:" << endl;
     for (const auto &item : dirs)
     {

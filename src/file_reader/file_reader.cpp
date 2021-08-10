@@ -11,13 +11,13 @@ extern "C"
 using namespace std;
 using uint8 = unsigned char;
 
-uint8 *readZipEntry(const char *fileName, const char *entryName, size_t &dataSize)
+uint8 *readZipEntry(std::string fileName, std::string entryName, size_t &dataSize)
 {
     uint8 *buf;
     size_t bufsize;
-    struct zip_t *zip = zip_open(fileName, 0, 'r');
+    struct zip_t *zip = zip_open(fileName.c_str(), 0, 'r');
     {
-        zip_entry_open(zip, entryName);
+        zip_entry_open(zip, entryName.c_str());
         {
             bufsize = zip_entry_size(zip);
             buf = static_cast<unsigned char *>(calloc(sizeof(unsigned char), bufsize));
@@ -31,11 +31,11 @@ uint8 *readZipEntry(const char *fileName, const char *entryName, size_t &dataSiz
     return buf;
 }
 
-uint8 *readFileEntry(const char *fileName, size_t &dataSize)
+uint8 *readFileEntry(std::string fileName, size_t &dataSize)
 {
     size_t size;
     char *buffer;
-    ifstream filestr(fileName, ios::binary);
+    ifstream filestr(fileName.c_str(), ios::binary);
     if (!filestr)
     {
         dataSize = 0;
@@ -57,10 +57,10 @@ uint8 *readFileEntry(const char *fileName, size_t &dataSize)
     return result;
 }
 
-bool isDir(const char *path)
+bool isDir(std::string path)
 {
     tinydir_file file;
-    if (tinydir_file_open(&file, path) < 0)
+    if (tinydir_file_open(&file, path.c_str()) < 0)
     {
         return false;
     }
@@ -68,10 +68,10 @@ bool isDir(const char *path)
     return file.is_dir;
 }
 
-void listDirFiles(const char *path, unordered_map<string, string> &childFiles, vector<string> &childDirs)
+void listDirFiles(std::string path, unordered_map<string, string> &childFiles, vector<string> &childDirs)
 {
     tinydir_dir dir;
-    if (tinydir_open(&dir, path) < 0)
+    if (tinydir_open(&dir, path.c_str()) < 0)
     {
         return;
     }
