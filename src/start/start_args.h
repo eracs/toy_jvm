@@ -13,6 +13,7 @@ public:
     std::string classpath;
     std::string jre;
     std::string command;
+    bool debug;
 };
 
 StartArgs *parseArgs(int argc, char *argv[]);

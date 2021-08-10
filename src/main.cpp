@@ -2,12 +2,13 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/basic_file_sink.h"
+#include "start/start_args.h"
 
 #include "test/test.h"
 
 using namespace std;
 
-void initLogger()
+void initLogger(bool debug)
 {
     auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
     console_sink->set_level(spdlog::level::debug);
@@ -19,16 +20,29 @@ void initLogger()
 
     std::vector<spdlog::sink_ptr> sinks{console_sink, file_sink};
     auto logger = std::make_shared<spdlog::logger>("Logger", sinks.begin(), sinks.end());
-    logger->set_level(spdlog::level::debug);
+    if (debug)
+    {
+        logger->set_level(spdlog::level::debug);
+    }
+    else
+    {
+        logger->set_level(spdlog::level::off);
+    }
+
     logger->info("Spdlog init success!!!");
     spdlog::register_logger(logger);
 }
 
 int main(int argc, char **argv)
 {
-    initLogger();
+    auto startArgs = parseArgs(argc, argv);
+    if (!startArgs)
+    {
+        return 0;
+    }
+    initLogger(startArgs->debug);
     spdlog::get("Logger")->info("Start Run Toy JVM!");
-    run_test(argc, argv);
+    // run_test(argc, argv);
 
     return 0;
 }
