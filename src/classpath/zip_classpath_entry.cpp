@@ -21,15 +21,13 @@ uint8 *Zip_Classpath_Entry::readClass(const std::string &className, size_t &leng
     auto logger = spdlog::get("Logger");
     logger->debug("ZipEntry start readClass, className={0} ", className);
 
-    string filePath(this->zipPath);
-
-    string classFilePath = (className);
+    string classFilePath(className);
     auto entryName = replace_all(classFilePath, get_dot_separator(), get_path_separator());
     entryName = entryName + ".class";
 
-    auto data = readZipEntry(filePath, entryName, length);
+    auto data = readZipEntry(this->zipPath, entryName, length);
 
-    logger->debug("ZipEntry readClass, className={0}, filePath={1}, entryName={2}, dataSize={3}", className, filePath, entryName, length);
+    logger->debug("ZipEntry finish readClass, className={0}, filePath={1}, entryName={2}, dataSize={3}", className, this->zipPath, entryName, length);
     if (length == 0)
     {
         free(data);
