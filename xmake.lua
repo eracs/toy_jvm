@@ -2,6 +2,7 @@ add_rules("mode.debug", "mode.release")
 add_requires("vcpkg::kubazip", {alias = "kubazip"})
 add_requires("clara")
 add_requires("vcpkg::tinydir", {alias = "tinydir"})
+add_requires("spdlog")
 
 target("toy_jvm")
     set_kind("binary")
@@ -14,6 +15,7 @@ target("toy_jvm")
     add_packages("kubazip")
     add_packages("clara")
     add_packages("tinydir")
+    add_packages("spdlog")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
