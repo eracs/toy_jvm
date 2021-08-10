@@ -11,7 +11,7 @@ extern "C"
 using namespace std;
 using uint8 = unsigned char;
 
-uint8 *readZipEntry(std::string fileName, std::string entryName, size_t &dataSize)
+uint8 *readZipEntry(const std::string fileName, std::string entryName, size_t &dataSize)
 {
     uint8 *buf;
     size_t bufsize;
@@ -31,7 +31,7 @@ uint8 *readZipEntry(std::string fileName, std::string entryName, size_t &dataSiz
     return buf;
 }
 
-uint8 *readFileEntry(std::string fileName, size_t &dataSize)
+uint8 *readFileEntry(const std::string fileName, size_t &dataSize)
 {
     size_t size;
     char *buffer;

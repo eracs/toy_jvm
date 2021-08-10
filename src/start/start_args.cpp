@@ -4,7 +4,9 @@
 
 #include "start_args.h"
 #include <iostream>
+#include <cstdlib>
 #include "clara.hpp"
+#include "../utils/string_utils.h"
 
 using namespace std;
 using namespace clara;
@@ -47,8 +49,8 @@ StartArgs *parseArgs(int argc, char *argv[])
     std::string args;
     auto helpParse = Help(help);
     auto versionParse = Opt(version)["-v"]["-version"]["--version"]("Show the version.");
-    auto pathParse = Opt(classpath, "CLASSPATH")["-cp"]["-classpath"]["--classpath"]("Set the classpath") |
-                     Opt(jrepath, "JAVA_RUNTIME")["-jre"]["--jre"]["--xjre"]("Set the jre path,could be JAVA_HOME/jre");
+    auto pathParse = Opt(classpath, "CLASSPATH")["-cp"]["-classpath"]["--classpath"]("Set the classpath, default is current path") |
+                     Opt(jrepath, "JAVA_RUNTIME")["-jre"]["--jre"]["--xjre"]("Set the jre path, could be JAVA_HOME/jre");
     auto argsParse = Opt(args, "args")["-args"]["--args"]["--command"]("The command is forwarded to the program(public static void main(String[] args))");
     if (helpParse.parse(Args(argc, argv)))
     {
@@ -90,20 +92,32 @@ StartArgs *parseArgs(int argc, char *argv[])
     }
     else
     {
-        classpath = "";
+        classpath = ".";
         jrepath = "";
     }
     if (classpath == "")
     {
-        cerr << "The classpath cannot be empty" << endl;
-        ;
-        return nullptr;
+        classpath = ".";
     }
     if (jrepath == "")
     {
-        cerr << "The jre path cannot be empty" << endl;
-        ;
-        return nullptr;
+        std::string javahome(getenv("JAVA_HOME"));
+        if (javahome.empty())
+        {
+            cerr << "The jre path cannot be empty" << endl;
+            return nullptr;
+        }
+        else
+        {
+            if (string_util::endsWith(javahome, "/") || string_util::endsWith(javahome, "\\"))
+            {
+                jrepath = javahome + "jre/";
+            }
+            else
+            {
+                jrepath = javahome + "/jre/";
+            }
+        }
     }
     if (argsParse.parse(Args(argc, argv)))
     {

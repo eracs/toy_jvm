@@ -9,6 +9,8 @@ using namespace std;
 
 void run_test(int argc, char *argv[])
 {
+    auto javahome = getenv("JAVA_HOME");
+    spdlog::info("JAVA_HOME is {0}", javahome);
     test_parse_start_args(argc, argv);
     // cout << "test_read_zip" << endl;
     // test_search_zip_entry();
@@ -51,17 +53,27 @@ void test_parse_start_args(int argc, char *argv[])
         cout << args->jre << endl;
         size_t length;
         string fileName = args->jre + "test.zip";
-
+        spdlog::info("start test zip entry");
         Zip_Classpath_Entry zip_entry(fileName);
         auto buf = zip_entry.readClass("test.foo", length);
         // auto buf = readZipEntry(fileName.c_str(), "test/foo.class", length);
-
         std::cout << "length is " << length << std::endl;
         for (int i = 0; i < length; i++)
         {
             std::cout << "index=" << i << " ASCII=" << buf[i] - 0 << " Value=" << buf[i] << std::endl;
         }
         free(buf);
+        spdlog::info("start test dir entry");
+        string dirPath = args->jre + "childDir";
+        Dir_Classpath_Entry dir_entry(dirPath);
+        size_t dataSize;
+        auto data = dir_entry.readClass("toy.Main", dataSize);
+        spdlog::info("the entry data size={0}", dataSize);
+        for (int i = 0; i < dataSize; i++)
+        {
+            std::cout << "index=" << i << " ASCII=" << data[i] - 0 << " Value=" << data[i] << std::endl;
+        }
+        free(data);
     }
     else
     {

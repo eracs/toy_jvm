@@ -33,7 +33,7 @@ uint8 *Dir_Classpath_Entry::readClass(const std::string &className, size_t &leng
     entryName = entryName + ".class";
     string fileName = this->dirPath + entryName;
     auto data = readFileEntry(fileName, length);
-    logger->debug("DirEntry finish readClass, className={0}, dirPath={1}, entryName={2}, dataSize={3}", className, this->dirPath, entryName, length);
+    logger->debug("DirEntry finish readClass, className={0}, dirPath={1},filePath={2}, entryName={3}, dataSize={4}", className, this->dirPath, fileName, entryName, length);
     if (length == 0)
     {
         return nullptr;
