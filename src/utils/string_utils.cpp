@@ -10,6 +10,9 @@ const std::string PATH_SEPARATOR = "/";
 const std::string DOT_SEPARATOR = ".";
 const std::string WIN_PARAM_SEPARATOR = ";";
 const std::string UNIX_PARAM_SEPARATOR = ":";
+const std::string CLASS_FILE_EXT = ".class";
+const std::string ZIP_FILE_EXT = ".zip";
+const std::string JAR_FILE_EXT = ".jar";
 
 std::string string_util::get_param_separator()
 {
@@ -23,6 +26,20 @@ std::string string_util::get_param_separator()
 std::string string_util::get_dot_separator()
 {
     return DOT_SEPARATOR;
+}
+std::string string_util::get_class_file_ext()
+{
+    return CLASS_FILE_EXT;
+}
+
+std::string string_util::get_jar_file_ext()
+{
+    return JAR_FILE_EXT;
+}
+
+std::string string_util::get_zip_file_ext()
+{
+    return ZIP_FILE_EXT;
 }
 
 std::string string_util::get_path_separator()

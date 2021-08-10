@@ -9,9 +9,9 @@ using namespace std;
 
 void run_test(int argc, char *argv[])
 {
-    auto javahome = getenv("JAVA_HOME");
-    spdlog::info("JAVA_HOME is {0}", javahome);
-    test_parse_start_args(argc, argv);
+    // auto javahome = getenv("JAVA_HOME");
+    // spdlog::info("JAVA_HOME is {0}", javahome);
+    // test_parse_start_args(argc, argv);
     // cout << "test_read_zip" << endl;
     // test_search_zip_entry();
     // cout << "test_read_file" << endl;
@@ -19,6 +19,8 @@ void run_test(int argc, char *argv[])
     // test_list_file(argc, argv);
     // auto s = string_util::get_param_separator();
     // std::cout << s << endl;
+    spdlog::info("File exist {0}",fileExist("./foo-1-backup.txt"));
+    spdlog::info("Dir exist {0}",isDir("."));
 }
 
 void test_list_file(int argc, char *argv[])

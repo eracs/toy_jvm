@@ -1,9 +1,7 @@
-#ifndef TOY_JVM_CLASSPATH_ENTRY
-#define TOY_JVM_CLASSPATH_ENTRY
+#ifndef TOY_JVM_CLASSPATH_ENTRY_H
+#define TOY_JVM_CLASSPATH_ENTRY_H
 
-#include <iostream>
-#include <unordered_map>
-#include <vector>
+#include <string>
 
 class Classpath_Entry
 {
@@ -30,7 +28,6 @@ class Dir_Classpath_Entry : public Classpath_Entry
 private:
     /* data */
     std::string dirPath;
-    std::unordered_map<std::string, std::string> childFiles;
 
 public:
     Dir_Classpath_Entry() = delete;

@@ -23,7 +23,7 @@ uint8 *Zip_Classpath_Entry::readClass(const std::string &className, size_t &leng
 
     string classFilePath(className);
     auto entryName = replace_all(classFilePath, get_dot_separator(), get_path_separator());
-    entryName = entryName + ".class";
+    entryName = entryName + get_class_file_ext();
 
     auto data = readZipEntry(this->zipPath, entryName, length);
 

@@ -6,6 +6,7 @@
 #define TOY_JVM_STRING_UTILS_H
 #include <iostream>
 #include <vector>
+#include <string>
 
 namespace string_util
 {
@@ -27,6 +28,12 @@ namespace string_util
     std::string get_dot_separator();
 
     std::string get_path_separator();
+
+    std::string get_class_file_ext();
+
+    std::string get_jar_file_ext();
+
+    std::string get_zip_file_ext();
 
     bool is_os_windows();
 

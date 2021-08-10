@@ -57,7 +57,7 @@ uint8 *readFileEntry(const std::string fileName, size_t &dataSize)
     return result;
 }
 
-bool isDir(std::string path)
+bool isDir(const std::string &path)
 {
     tinydir_file file;
     if (tinydir_file_open(&file, path.c_str()) < 0)
@@ -68,7 +68,7 @@ bool isDir(std::string path)
     return file.is_dir;
 }
 
-void listDirFiles(std::string path, unordered_map<string, string> &childFiles, vector<string> &childDirs)
+void listDirFiles(const std::string &path, unordered_map<string, string> &childFiles, vector<string> &childDirs)
 {
     tinydir_dir dir;
     if (tinydir_open(&dir, path.c_str()) < 0)
@@ -98,4 +98,10 @@ void listDirFiles(std::string path, unordered_map<string, string> &childFiles, v
         tinydir_next(&dir);
     }
     tinydir_close(&dir);
+}
+
+bool fileExist(const std::string &path)
+{
+    ifstream f(path.c_str());
+    return f.good();
 }

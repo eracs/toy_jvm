@@ -9,8 +9,9 @@ unsigned char *readZipEntry(const std::string fileName, std::string entryName, s
 
 unsigned char *readFileEntry(const std::string fileName, size_t &dataSize);
 
-bool isDir(std::string path);
+bool isDir(const std::string &path);
 
-void listDirFiles(std::string path, std::unordered_map<std::string, std::string> &childFiles, std::vector<std::string> &childDirs);
+void listDirFiles(const std::string &path, std::unordered_map<std::string, std::string> &childFiles, std::vector<std::string> &childDirs);
 
+bool fileExist(const std::string &path);
 #endif
