@@ -5,7 +5,6 @@
 #include "start_args.h"
 #include <iostream>
 #include "clara.hpp"
-#include "spdlog/spdlog.h"
 
 using namespace std;
 using namespace clara;
@@ -14,13 +13,13 @@ std ::string version = "0.0.1";
 
 void showVersion()
 {
-    cout << "toy_jvm_" << version << endl;
+    cout << "Toy JVM " << version << endl;
 }
 
 void showTitle()
 {
-    showVersion();
-    cout << "Toy Jvm written in c++" << endl;
+    cout << "Toy Jvm written in c++, version " << version << endl;
+    cout << endl;
     cout << "Project: https://github.com/eracs/toy_jvm" << endl;
 }
 
@@ -96,12 +95,14 @@ StartArgs *parseArgs(int argc, char *argv[])
     }
     if (classpath == "")
     {
-        spdlog::get("Logger")->error("The classpath cannot be empty");
+        cerr << "The classpath cannot be empty" << endl;
+        ;
         return nullptr;
     }
     if (jrepath == "")
     {
-        spdlog::get("Logger")->error("The jre path cannot be empty");
+        cerr << "The jre path cannot be empty" << endl;
+        ;
         return nullptr;
     }
     if (argsParse.parse(Args(argc, argv)))
