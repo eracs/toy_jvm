@@ -3,6 +3,7 @@
 #include "../file_reader/file_reader.h"
 #include "../utils/string_utils.h"
 #include "../classpath/classpath_entry.h"
+#include "spdlog/spdlog.h"
 
 using namespace std;
 
@@ -23,7 +24,7 @@ void test_list_file(int argc, char *argv[])
     auto args = parseArgs(argc, argv);
     if (!args)
     {
-        cout << "Failed to parse args" << endl;
+        spdlog::get("Logger")->error("Failed to parse args");
         return;
     }
     vector<string> dirs;
@@ -50,9 +51,9 @@ void test_parse_start_args(int argc, char *argv[])
         cout << args->jre << endl;
         size_t length;
         string fileName = args->jre + "test.zip";
-        
+
         Zip_Classpath_Entry zip_entry(fileName);
-        auto buf=zip_entry.readClass("test.foo",length);
+        auto buf = zip_entry.readClass("test.foo", length);
         // auto buf = readZipEntry(fileName.c_str(), "test/foo.class", length);
 
         std::cout << "length is " << length << std::endl;

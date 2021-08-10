@@ -5,6 +5,7 @@
 #include "start_args.h"
 #include <iostream>
 #include "clara.hpp"
+#include "spdlog/spdlog.h"
 
 using namespace std;
 using namespace clara;
@@ -95,12 +96,12 @@ StartArgs *parseArgs(int argc, char *argv[])
     }
     if (classpath == "")
     {
-        cout << "The classpath cannot be empty" << endl;
+        spdlog::get("Logger")->error("The classpath cannot be empty");
         return nullptr;
     }
     if (jrepath == "")
     {
-        cout << "The jre path cannot be empty" << endl;
+        spdlog::get("Logger")->error("The jre path cannot be empty");
         return nullptr;
     }
     if (argsParse.parse(Args(argc, argv)))
