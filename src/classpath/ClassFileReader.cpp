@@ -6,7 +6,7 @@
 using namespace string_util;
 using namespace std;
 
-void addChildPackages(const std::string &path, std::vector<std::unique_ptr<ClasspathEntry>> &container)
+void addChildPackages(const std::string &path, std::vector<std::shared_ptr<ClasspathEntry>> &container)
 {
     auto logger = spdlog::get("Logger");
     unordered_map<string, string> childFiles;
@@ -16,7 +16,7 @@ void addChildPackages(const std::string &path, std::vector<std::unique_ptr<Class
     {
         if (item.second == "jar")
         {
-            container.push_back(make_unique<ZipClasspathEntry>(item.first));
+            container.push_back(make_shared<ZipClasspathEntry>(item.first));
             logger->info("ClassPath: add jar {0} ", item.first);
         }
     }
@@ -53,25 +53,27 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
         else if (endsWith(path, ".zip") || endsWith(path, ".jar"))
         {
             logger->info("ClassPath: add jar {0} ", path);
-            ClassFileReader::userEntries.push_back(make_unique<ZipClasspathEntry>(path));
+            ClassFileReader::userEntries.push_back(make_shared<ZipClasspathEntry>(path));
         }
         else
         {
             if (endsWith(path, "/") || endsWith(path, "\\"))
             {
                 auto realPath = path.substr(0, path.size() - 1);
-                ClassFileReader::userEntries.push_back(make_unique<ZipClasspathEntry>(realPath));
+                ClassFileReader::userEntries.push_back(make_shared<ZipClasspathEntry>(realPath));
                 logger->info("ClassPath: add dir {0} ", realPath);
             }
             else
             {
 
-                ClassFileReader::userEntries.push_back(make_unique<ZipClasspathEntry>(path));
+                ClassFileReader::userEntries.push_back(make_shared<ZipClasspathEntry>(path));
                 logger->info("ClassPath: add dir {0} ", path);
             }
         }
         logger->info("ClassPath: finish add classpath {0} ", path);
     }
+    logger->info("boot entry size={0}, ext entry size={1}, user entry size={2}", ClassFileReader::bootEntries.size(), ClassFileReader::extEntries.size(), ClassFileReader::userEntries.size());
+
     return true;
 }
 

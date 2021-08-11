@@ -1,6 +1,6 @@
 #include "string_utils.h"
 
-#ifdef _WINDOWS
+#if (defined _MSC_VER || defined __MINGW32__)
 const bool OS_WIN = true;
 #else
 const bool OS_WIN = false;

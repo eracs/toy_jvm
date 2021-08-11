@@ -12,11 +12,11 @@
 class ClassFileReader
 {
 private:
-    ClassFileReader(void);
+    ClassFileReader() = default;
 
-    std::vector<std::unique_ptr<ClasspathEntry>> bootEntries;
-    std::vector<std::unique_ptr<ClasspathEntry>> extEntries;
-    std::vector<std::unique_ptr<ClasspathEntry>> userEntries;
+    std::vector<std::shared_ptr<ClasspathEntry>> bootEntries;
+    std::vector<std::shared_ptr<ClasspathEntry>> extEntries;
+    std::vector<std::shared_ptr<ClasspathEntry>> userEntries;
 
     std::unordered_map<std::string, int> fileReadHistory;
 
@@ -28,9 +28,9 @@ public:
     uint8 *readClass(const std::string &className, size_t &length);
 
     //单例模式，线程不安全,但没关系，启动的时候就加载了
-    static ClassFileReader & get_instance()
+    static ClassFileReader &get_instance()
     {
-        static ClassFileReader m_pInstance;  //局部静态变量
+        static ClassFileReader m_pInstance; //局部静态变量
         return m_pInstance;
     };
 };
