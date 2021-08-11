@@ -6,6 +6,7 @@ add_requires("spdlog")
 
 target("toy_jvm")
     set_kind("binary")
+    set_languages("c++14")
     add_files("src/*.cpp")
     add_files("src/test/test.cpp")
     add_files("src/file_reader/*.cpp")
