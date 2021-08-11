@@ -8,18 +8,24 @@
 
 ----------
 
-通过实现JVM更好的去理解JVM
+- [ ] ~~通过实现JVM更好的去理解JVM~~
+- [x] 学习C++，与自己做对                
 
-## 使用步骤
+## 构建步骤
 
 ----------
 
- 1.   搭建C++环境（msvc/gcc/mingw等均可）
+ 1.  [安装vcpkg](https://github.com/microsoft/vcpkg)
  2.  [安装xmake](https://xmake.io/#/zh-cn/guide/installation)![Xmake](https://img.shields.io/badge/xmake-%3E%3Dv2.5.6-orange)
  3.  clone代码到本地
- > ```git clone https://github.com/eracs/toy_jvm.git ```
+ ```
+ git clone https://github.com/eracs/toy_jvm.git 
+ ```
  4.  使用xmake构建
-> ```xmake build ```
+ ```
+ xmake require
+ xmake build 
+ ```
 
 ## 功能实现
 
