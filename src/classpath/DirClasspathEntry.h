@@ -3,9 +3,11 @@
 
 #include "ClasspathEntry.h"
 
-class DirClasspathEntry : public ClasspathEntry {
+class DirClasspathEntry : public ClasspathEntry
+{
 private:
     std::string dirPath;
+
 public:
     DirClasspathEntry() = delete;
 
@@ -15,8 +17,7 @@ public:
 
     virtual ~DirClasspathEntry();
 
-    unsigned char *readClass(const std::string &className, size_t &length) const override;
+    uint8 *readClass(const std::string &className, size_t &length) const override;
 };
-
 
 #endif //TOY_JVM_DIRCLASSPATHENTRY_H

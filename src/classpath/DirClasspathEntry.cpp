@@ -14,7 +14,7 @@ DirClasspathEntry::~DirClasspathEntry()
 
 DirClasspathEntry::DirClasspathEntry(std::string dirPath) : dirPath(std::move(dirPath)) {}
 
-unsigned char *DirClasspathEntry::readClass(const std::string &className, size_t &length) const
+uint8 *DirClasspathEntry::readClass(const std::string &className, size_t &length) const
 {
     auto logger = spdlog::get("Logger");
     logger->debug("DirEntry start readClass, className={0} ", className);

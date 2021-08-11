@@ -5,9 +5,11 @@
 #include <string>
 #include <unordered_map>
 
-unsigned char *readZipEntry(const std::string fileName, std::string entryName, size_t &dataSize);
+using uint8 = unsigned char;
 
-unsigned char *readFileEntry(const std::string fileName, size_t &dataSize);
+uint8 *readZipEntry(const std::string fileName, std::string entryName, size_t &dataSize);
+
+uint8 *readFileEntry(const std::string fileName, size_t &dataSize);
 
 bool isDir(const std::string &path);
 

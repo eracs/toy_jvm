@@ -16,7 +16,7 @@ ZipClasspathEntry::~ZipClasspathEntry()
 {
 }
 
-unsigned char *ZipClasspathEntry::readClass(const std::string &className, size_t &length) const
+uint8 *ZipClasspathEntry::readClass(const std::string &className, size_t &length) const
 {
     auto logger = spdlog::get("Logger");
     logger->debug("ZipEntry start readClass, className={0} ", className);

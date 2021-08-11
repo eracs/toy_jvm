@@ -3,9 +3,11 @@
 
 #include "ClasspathEntry.h"
 
-class ZipClasspathEntry : public ClasspathEntry {
+class ZipClasspathEntry : public ClasspathEntry
+{
 private:
     std::string zipPath;
+
 public:
     ZipClasspathEntry() = delete;
 
@@ -15,8 +17,7 @@ public:
 
     virtual ~ZipClasspathEntry();
 
-    unsigned char *readClass(const std::string &className, size_t &length) const override;
+    uint8 *readClass(const std::string &className, size_t &length) const override;
 };
-
 
 #endif //TOY_JVM_ZIPCLASSPATHENTRY_H

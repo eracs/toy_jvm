@@ -9,7 +9,6 @@ extern "C"
 }
 
 using namespace std;
-using uint8 = unsigned char;
 
 uint8 *readZipEntry(const std::string fileName, std::string entryName, size_t &dataSize)
 {
