@@ -3,6 +3,7 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "start/start_args.h"
+#include "classpath/ClassFileReader.h"
 
 #include "test/test.h"
 
@@ -43,7 +44,7 @@ int main(int argc, char **argv)
     }
     initLogger(startArgs->debug);
     spdlog::get("Logger")->info("Start Run Toy JVM!");
-    run_test(startArgs);
-
+    auto class_file_reader = ClassFileReader::get_instance();
+    class_file_reader.init(startArgs->jre, startArgs->classpath);
     return 0;
 }

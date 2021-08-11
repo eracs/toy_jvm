@@ -12,15 +12,13 @@
 class ClassFileReader
 {
 private:
-    ClassFileReader() = default;
+    ClassFileReader(void);
 
     std::vector<std::unique_ptr<ClasspathEntry>> bootEntries;
     std::vector<std::unique_ptr<ClasspathEntry>> extEntries;
     std::vector<std::unique_ptr<ClasspathEntry>> userEntries;
 
     std::unordered_map<std::string, int> fileReadHistory;
-
-    static ClassFileReader *m_instance_ptr;
 
 public:
     //初始化，也是启动的时候调用
@@ -30,13 +28,10 @@ public:
     uint8 *readClass(const std::string &className, size_t &length);
 
     //单例模式，线程不安全,但没关系，启动的时候就加载了
-    static auto *get_instance()
+    static ClassFileReader & get_instance()
     {
-        if (m_instance_ptr == nullptr)
-        {
-            m_instance_ptr = new ClassFileReader;
-        }
-        return m_instance_ptr;
+        static ClassFileReader m_pInstance;  //局部静态变量
+        return m_pInstance;
     };
 };
 
