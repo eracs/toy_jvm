@@ -1,4 +1,5 @@
 # Toy_Jvm
+----------
 ![GitHub](https://img.shields.io/github/license/eracs/toy_jvm)![GitHub top language](https://img.shields.io/github/languages/top/eracs/toy_jvm)![GitHub last commit](https://img.shields.io/github/last-commit/eracs/toy_jvm)![GitHub contributors](https://img.shields.io/github/contributors/eracs/toy_jvm)![GitHub issues](https://img.shields.io/github/issues-raw/eracs/toy_jvm)
 -----------
 使用C++实现的JVM，使用Xmake构建，支持跨平台。JVM特性基于Java SE 8规范。
@@ -41,8 +42,9 @@
 - [ ] GC
 - [ ] 多线程
 ## 参考资料
-- [《Java虚拟机规范（Java SE 8版）》](https://book.douban.com/subject/26418340/)
+--------
 - [《自己动手写Java虚拟机》](https://book.douban.com/subject/26802084/)
+- [《Java虚拟机规范（Java SE 8版）》](https://book.douban.com/subject/26418340/)
 - [《深入理解Java虚拟机（第三版）》](https://book.douban.com/subject/34907497/)
 - [《揭秘Java虚拟机》](https://book.douban.com/subject/27086821/)
 - [《垃圾回收的算法与实现》](https://book.douban.com/subject/26821357/)

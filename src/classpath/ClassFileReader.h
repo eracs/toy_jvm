@@ -23,10 +23,13 @@ private:
     static ClassFileReader *m_instance_ptr;
 
 public:
-    bool init(const std::string &jre, const std::string &cp);
+    //初始化，也是启动的时候调用
+    bool init(const std::string &jrePath, const std::string &classpath);
 
+    //从磁盘中根据classname读取字节码
     uint8 *readClass(const std::string &className, size_t &length);
 
+    //单例模式，线程不安全,但没关系，启动的时候就加载了
     static auto *get_instance()
     {
         if (m_instance_ptr == nullptr)
