@@ -2,16 +2,18 @@
 #include "../start/start_args.h"
 #include "../file_reader/file_reader.h"
 #include "../utils/string_utils.h"
-#include "../classpath/classpath_entry.h"
+#include "../classpath/ClasspathEntry.h"
+#include "../classpath/DirClasspathEntry.h"
+#include "../classpath/ZipClasspathEntry.h"
 #include "spdlog/spdlog.h"
 
 using namespace std;
 
-void run_test(int argc, char *argv[])
+void run_test(StartArgs *args)
 {
     // auto javahome = getenv("JAVA_HOME");
     // spdlog::info("JAVA_HOME is {0}", javahome);
-    // test_parse_start_args(argc, argv);
+    test_parse_start_args(args);
     // cout << "test_read_zip" << endl;
     // test_search_zip_entry();
     // cout << "test_read_file" << endl;
@@ -19,8 +21,8 @@ void run_test(int argc, char *argv[])
     // test_list_file(argc, argv);
     // auto s = string_util::get_param_separator();
     // std::cout << s << endl;
-    spdlog::info("File exist {0}",fileExist("./foo-1-backup.txt"));
-    spdlog::info("Dir exist {0}",isDir("."));
+    // spdlog::info("File exist {0}", fileExist("./foo-1-backup.txt"));
+    // spdlog::info("Dir exist {0}", isDir("."));
 }
 
 void test_list_file(int argc, char *argv[])
@@ -47,16 +49,16 @@ void test_list_file(int argc, char *argv[])
     }
 }
 
-void test_parse_start_args(int argc, char *argv[])
+void test_parse_start_args(StartArgs *args)
 {
-    auto args = parseArgs(argc, argv);
+
     if (args)
     {
-        cout << args->jre << endl;
+        spdlog::info("jre path is {0}", args->jre);
         size_t length;
         string fileName = args->jre + "test.zip";
         spdlog::info("start test zip entry");
-        Zip_Classpath_Entry zip_entry(fileName);
+        ZipClasspathEntry zip_entry(fileName);
         auto buf = zip_entry.readClass("test.foo", length);
         // auto buf = readZipEntry(fileName.c_str(), "test/foo.class", length);
         std::cout << "length is " << length << std::endl;
@@ -67,7 +69,7 @@ void test_parse_start_args(int argc, char *argv[])
         free(buf);
         spdlog::info("start test dir entry");
         string dirPath = args->jre + "childDir";
-        Dir_Classpath_Entry dir_entry(dirPath);
+        DirClasspathEntry dir_entry(dirPath);
         size_t dataSize;
         auto data = dir_entry.readClass("toy.Main", dataSize);
         spdlog::info("the entry data size={0}", dataSize);

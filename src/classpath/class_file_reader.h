@@ -3,4 +3,22 @@
 
 #include <string>
 
+class Class_File_Reader
+{
+private:
+    /* data */
+public:
+    Class_File_Reader(/* args */);
+    ~Class_File_Reader();
+};
+
+Class_File_Reader::Class_File_Reader(/* args */)
+{
+}
+
+Class_File_Reader::~Class_File_Reader()
+{
+}
+
+
 #endif

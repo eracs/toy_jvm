@@ -47,13 +47,14 @@ StartArgs *parseArgs(int argc, char *argv[])
     bool debug = false;
     std::string classpath;
     std::string jrepath;
-    std::string args;
+
     auto helpParse = Help(help);
     auto versionParse = Opt(version)["-v"]["-version"]["--version"]("Show the version.");
-    auto debugParse = Opt(debug)["-d"]["-debug"]["--log"]("Show the debug info.");
+
     auto pathParse = Opt(classpath, "CLASSPATH")["-cp"]["-classpath"]["--classpath"]("Set the classpath, default is current path") |
-                     Opt(jrepath, "JAVA_RUNTIME")["-jre"]["--jre"]["--xjre"]("Set the jre path, could be JAVA_HOME/jre");
-    auto argsParse = Opt(args, "args")["-args"]["--args"]["--command"]("The command is forwarded to the program(public static void main(String[] args))");
+                     Opt(jrepath, "JAVA_RUNTIME")["-jre"]["--jre"]["--xjre"]("Set the jre path, could be JAVA_HOME/jre") |
+                     Opt(debug)["-d"]["-debug"]["--log"]("Show the debug info.");
+
     if (helpParse.parse(Args(argc, argv)))
     {
         if (help)
@@ -67,16 +68,8 @@ StartArgs *parseArgs(int argc, char *argv[])
             {
                 printHelpInfo(v.left, v.right);
             }
-            for (auto v : debugParse.getHelpColumns())
-            {
-                printHelpInfo(v.left, v.right);
-            }
-            for (auto v : pathParse.getHelpColumns())
-            {
-                printHelpInfo(v.left, v.right);
-            }
 
-            for (auto v : argsParse.getHelpColumns())
+            for (auto v : pathParse.getHelpColumns())
             {
                 printHelpInfo(v.left, v.right);
             }
@@ -91,17 +84,6 @@ StartArgs *parseArgs(int argc, char *argv[])
             showVersion();
             return nullptr;
         }
-    }
-    if (debugParse.parse(Args(argc, argv)))
-    {
-        if (debug)
-        {
-            debug = true;
-        }
-    }
-    else
-    {
-        debug = false;
     }
     auto startArgs = new StartArgs;
 
@@ -137,16 +119,9 @@ StartArgs *parseArgs(int argc, char *argv[])
             }
         }
     }
-    if (argsParse.parse(Args(argc, argv)))
-    {
-    }
-    else
-    {
-        args = "";
-    }
+
     startArgs->classpath = classpath;
     startArgs->jre = jrepath;
-    startArgs->command = args;
     startArgs->debug = debug;
     return startArgs;
 }

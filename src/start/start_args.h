@@ -12,7 +12,6 @@ public:
     StartArgs() = default;
     std::string classpath;
     std::string jre;
-    std::string command;
     bool debug;
 };
 

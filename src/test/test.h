@@ -2,9 +2,11 @@
 #define TOY_JVM_TEST_H
 
 #include <iostream>
-void run_test(int argc, char *argv[]);
+#include "../start/start_args.h"
 
-void test_parse_start_args(int argc, char *argv[]);
+void run_test(StartArgs *args);
+
+void test_parse_start_args(StartArgs *args);
 
 void test_search_zip_entry();
 

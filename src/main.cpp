@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     }
     initLogger(startArgs->debug);
     spdlog::get("Logger")->info("Start Run Toy JVM!");
-    // run_test(argc, argv);
+    run_test(startArgs);
 
     return 0;
 }
