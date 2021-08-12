@@ -33,7 +33,7 @@
 ----------
 
 - [x] [搜索Class文件](https://github.com/eracs/toy_jvm/tree/master/src/classpath)
-- [ ] 解析Class文件
+- [ ] [解析Class文件](https://github.com/eracs/toy_jvm/tree/master/src/classfile)
 - [ ] 执行字节码
 - [ ] 加载类
 - [ ] 调用方法
