@@ -61,13 +61,12 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
             if (endsWith(path, "/") || endsWith(path, "\\"))
             {
                 auto realPath = path.substr(0, path.size() - 1);
-                ClassFileReader::userEntries.push_back(make_unique<ZipClasspathEntry>(realPath));
+                ClassFileReader::userEntries.push_back(make_unique<DirClasspathEntry>(realPath));
                 logger->info("ClassPath: add dir {0} ", realPath);
             }
             else
             {
-
-                ClassFileReader::userEntries.push_back(make_unique<ZipClasspathEntry>(path));
+                ClassFileReader::userEntries.push_back(make_unique<DirClasspathEntry>(path));
                 logger->info("ClassPath: add dir {0} ", path);
             }
         }
@@ -81,11 +80,51 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
 uint8 *ClassFileReader::readClass(const std::string &className, size_t &length)
 {
     uint8 *data = nullptr;
+    if (ClassFileReader::fileReadHistory.find(className) != ClassFileReader::fileReadHistory.end())
+    {
+        auto p = ClassFileReader::fileReadHistory[className];
+        if (p == 0)
+        {
+            for (auto &entry : ClassFileReader::bootEntries)
+            {
+                data = entry->readClass(className, length);
+                if (length > 0)
+                {
+                    break;
+                }
+            }
+        }
+        else if (p == 1)
+        {
+            for (auto &entry : ClassFileReader::extEntries)
+            {
+                data = entry->readClass(className, length);
+                if (length > 0)
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (auto &entry : ClassFileReader::userEntries)
+            {
+                data = entry->readClass(className, length);
+                if (length > 0)
+                {
+                    break;
+                }
+            }
+        }
+        return data;
+    }
+
     for (auto &entry : ClassFileReader::bootEntries)
     {
         data = entry->readClass(className, length);
         if (length > 0)
         {
+            ClassFileReader::fileReadHistory.insert(make_pair(className, 0));
             return data;
         }
     }
@@ -94,6 +133,7 @@ uint8 *ClassFileReader::readClass(const std::string &className, size_t &length)
         data = entry->readClass(className, length);
         if (length > 0)
         {
+            ClassFileReader::fileReadHistory.insert(make_pair(className, 1));
             return data;
         }
     }
@@ -102,6 +142,7 @@ uint8 *ClassFileReader::readClass(const std::string &className, size_t &length)
         data = entry->readClass(className, length);
         if (length > 0)
         {
+            ClassFileReader::fileReadHistory.insert(make_pair(className, 2));
             return data;
         }
     }
