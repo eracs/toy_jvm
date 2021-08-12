@@ -31,7 +31,7 @@ public:
     //从磁盘中根据classname读取字节码
     uint8 *readClass(const std::string &className, size_t &length);
 
-    //单例模式，线程不安全,但没关系，启动的时候就加载了
+    //单例模式
     static ClassFileReader &get_instance()
     {
         static ClassFileReader m_pInstance; //局部静态变量

@@ -46,5 +46,6 @@ int main(int argc, char **argv)
     spdlog::get("Logger")->info("Start Run Toy JVM!");
 
     ClassFileReader::get_instance().init(startArgs->jre, startArgs->classpath);
+
     return 0;
 }

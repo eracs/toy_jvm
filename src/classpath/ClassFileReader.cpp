@@ -16,8 +16,9 @@ void addChildPackages(const std::string &path, std::vector<std::unique_ptr<Class
     {
         if (item.second == "jar")
         {
-            container.push_back(make_unique<ZipClasspathEntry>(item.first));
-            logger->info("ClassPath: add jar {0} ", item.first);
+            string absPath = path + "/" + item.first;
+            container.push_back(make_unique<ZipClasspathEntry>(absPath));
+            logger->info("ClassPath: add jar {0} ", absPath);
         }
     }
 }
@@ -52,7 +53,7 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
         }
         else if (endsWith(path, ".zip") || endsWith(path, ".jar"))
         {
-            logger->info("ClassPath: add jar {0} ", path);
+            logger->info("ClassPath: add jar/zip {0} ", path);
             ClassFileReader::userEntries.push_back(make_unique<ZipClasspathEntry>(path));
         }
         else
