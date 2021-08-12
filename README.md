@@ -19,14 +19,14 @@
  1.  [安装vcpkg](https://github.com/microsoft/vcpkg)
  2.  [安装xmake](https://xmake.io/#/zh-cn/guide/installation)![Xmake](https://img.shields.io/badge/xmake-%3E%3Dv2.5.6-orange)
  3.  clone代码到本地
- ```
- git clone https://github.com/eracs/toy_jvm.git 
- ```
+    ```
+    git clone https://github.com/eracs/toy_jvm.git 
+    ```
  4.  使用xmake构建
- ```
- xmake require
- xmake build 
- ```
+    ```
+    xmake require
+    xmake build 
+    ```
 
 ## 功能实现
 
