@@ -18,7 +18,7 @@ void addChildPackages(const std::string &path, std::vector<std::unique_ptr<Class
         {
             string absPath = path + "/" + item.first;
             container.push_back(make_unique<ZipClasspathEntry>(absPath));
-            logger->info("ClassPath: add jar {0} ", absPath);
+            logger->debug("ClassPath: add jar {0} ", absPath);
         }
     }
 }
@@ -35,17 +35,17 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
 
     //启动类来自于%jre%/lib中的所有jar
     auto bootpath = jrepath + "/lib";
-    logger->info("ClassPath: bootpath is {0} ", bootpath);
+    logger->debug("ClassPath: bootpath is {0} ", bootpath);
     addChildPackages(bootpath, ClassFileReader::bootEntries);
     //拓展类来自于%jre%/lib/ext中的所有jar
     auto extpath = jrepath + "/lib/ext";
-    logger->info("ClassPath: extpath is {0} ", extpath);
+    logger->debug("ClassPath: extpath is {0} ", extpath);
     addChildPackages(extpath, ClassFileReader::extEntries);
 
     auto cpParams = split(classpath, get_param_separator());
     for (auto &path : cpParams)
     {
-        logger->info("ClassPath: start add classpath {0} ", path);
+        logger->debug("ClassPath: start add classpath {0} ", path);
         if (endsWith(path, "*"))
         {
             auto realPath = path.substr(0, path.size() - 2);
@@ -53,7 +53,7 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
         }
         else if (endsWith(path, ".zip") || endsWith(path, ".jar"))
         {
-            logger->info("ClassPath: add jar/zip {0} ", path);
+            logger->debug("ClassPath: add jar/zip {0} ", path);
             ClassFileReader::userEntries.push_back(make_unique<ZipClasspathEntry>(path));
         }
         else
@@ -63,18 +63,18 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
                 auto realPath = path.substr(0, path.size() - 1);
                 ClassFileReader::userEntries.push_back(make_unique<DirClasspathEntry>(realPath));
                 addChildPackages(realPath, ClassFileReader::userEntries);
-                logger->info("ClassPath: add dir {0} ", realPath);
+                logger->debug("ClassPath: add dir {0} ", realPath);
             }
             else
             {
                 ClassFileReader::userEntries.push_back(make_unique<DirClasspathEntry>(path));
                 addChildPackages(path, ClassFileReader::userEntries);
-                logger->info("ClassPath: add dir {0} ", path);
+                logger->debug("ClassPath: add dir {0} ", path);
             }
         }
-        logger->info("ClassPath: finish add classpath {0} ", path);
+        logger->debug("ClassPath: finish add classpath {0} ", path);
     }
-    logger->info("boot entry size={0}, ext entry size={1}, user entry size={2}", ClassFileReader::bootEntries.size(), ClassFileReader::extEntries.size(), ClassFileReader::userEntries.size());
+    logger->debug("Classpath prepared, boot entry size={0}, ext entry size={1}, user entry size={2}", ClassFileReader::bootEntries.size(), ClassFileReader::extEntries.size(), ClassFileReader::userEntries.size());
 
     return true;
 }

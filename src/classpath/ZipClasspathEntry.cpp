@@ -19,7 +19,7 @@ ZipClasspathEntry::~ZipClasspathEntry()
 uint8 *ZipClasspathEntry::readClass(const std::string &className, size_t &length) const
 {
     auto logger = spdlog::get("Logger");
-    logger->debug("ZipEntry start readClass, className={0} ", className);
+    logger->debug("From zip readClass, className={0}, path={1} ", className, this->zipPath);
 
     //将class名称转换成文件名
     string classFilePath(className);
@@ -28,12 +28,13 @@ uint8 *ZipClasspathEntry::readClass(const std::string &className, size_t &length
 
     auto data = readZipEntry(this->zipPath, entryName, length);
 
-    logger->debug("ZipEntry finish readClass, className={0}, filePath={1}, entryName={2}, dataSize={3}", className,
-                  this->zipPath, entryName, length);
     if (length == 0)
     {
         free(data);
         return nullptr;
     }
+
+    logger->debug("ReadClass finished, className={0}, path={1},  dataSize={2}", className,
+                  this->zipPath, length);
     return data;
 }
