@@ -39,7 +39,7 @@ void printHelpInfo(const std::string &left, const std::string &right)
     cout << " " << right << endl;
 }
 
-//解析启动参数，如果参数返回为空（即提前打印帮助信息或版本信息），则结束运行
+
 StartArgs *parseArgs(int argc, char *argv[])
 {
 

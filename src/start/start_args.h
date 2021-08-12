@@ -15,7 +15,7 @@ public:
     bool debug;
 };
 
-//用于解析启动参数
+//parse start args(such as jre, classpath, etc.)
 StartArgs *parseArgs(int argc, char *argv[]);
 
 #endif //TOY_JVM_START_ARGS_H
