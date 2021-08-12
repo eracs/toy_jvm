@@ -33,15 +33,16 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
     }
     auto jrepath = jreParams[0];
 
-    //启动类来自于%jre%/lib中的所有jar
+    //add all jars in %jre%/lib
     auto bootpath = jrepath + "/lib";
     logger->debug("ClassPath: bootpath is {0} ", bootpath);
     addChildPackages(bootpath, ClassFileReader::bootEntries);
-    //拓展类来自于%jre%/lib/ext中的所有jar
+    //add all jars in %jre%/lib/ext
     auto extpath = jrepath + "/lib/ext";
     logger->debug("ClassPath: extpath is {0} ", extpath);
     addChildPackages(extpath, ClassFileReader::extEntries);
 
+    
     auto cpParams = split(classpath, get_param_separator());
     for (auto &path : cpParams)
     {

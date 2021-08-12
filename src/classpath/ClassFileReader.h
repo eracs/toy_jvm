@@ -25,16 +25,16 @@ public:
 
     ClassFileReader &operator=(const ClassFileReader &) = delete;
 
-    //初始化，也是启动的时候调用
+    //init classpath
     bool init(const std::string &jrePath, const std::string &classpath);
 
-    //从磁盘中根据classname读取字节码
+    //read class binary content by classname
     uint8 *readClass(const std::string &className, size_t &length);
 
-    //单例模式
+    //Singleton
     static ClassFileReader &get_instance()
     {
-        static ClassFileReader m_pInstance; //局部静态变量
+        static ClassFileReader m_pInstance;
         return m_pInstance;
     };
 };

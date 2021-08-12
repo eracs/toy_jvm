@@ -73,19 +73,19 @@ bool string_util::is_os_windows()
     return OS_WIN;
 }
 
-std::vector<std::string> string_util::split(const std::string &string,
+std::vector<std::string> string_util::split(const std::string &source,
                                             const std::string &sep)
 {
     std::vector<std::string> result;
     std::string::size_type start = 0;
-    std::string::size_type index = string.find(sep, start);
+    std::string::size_type index = source.find(sep, start);
     while (index != std::string::npos)
     {
-        result.push_back(string.substr(start, index - start));
+        result.push_back(source.substr(start, index - start));
         start = index + sep.size();
-        index = string.find(sep, start);
+        index = source.find(sep, start);
     }
-    result.push_back(string.substr(start));
+    result.push_back(source.substr(start));
     return result;
 }
 

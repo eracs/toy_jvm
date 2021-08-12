@@ -15,7 +15,7 @@ namespace string_util
 
     bool endsWith(const std::string &source, const std::string &tail);
 
-    std::vector<std::string> split(const std::string &string, const std::string &sep);
+    std::vector<std::string> split(const std::string &source, const std::string &sep);
 
     void replace_self(std::string &source,
                       const std::string &old_value,

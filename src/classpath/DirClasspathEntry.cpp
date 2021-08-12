@@ -19,7 +19,7 @@ uint8 *DirClasspathEntry::readClass(const std::string &className, size_t &length
     auto logger = spdlog::get("Logger");
     logger->debug("From dir readClass, className={0}, path={1}  ", className, this->dirPath);
 
-    //将classname转换成文件路径
+    //convert classname to filepath
     string classFilePath(className);
     auto entryName = replace_all(classFilePath, get_dot_separator(), get_path_separator());
     entryName = entryName + get_class_file_ext();
