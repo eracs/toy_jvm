@@ -14,13 +14,17 @@ class ClassFileReader
 private:
     ClassFileReader() = default;
 
-    std::vector<std::shared_ptr<ClasspathEntry>> bootEntries;
-    std::vector<std::shared_ptr<ClasspathEntry>> extEntries;
-    std::vector<std::shared_ptr<ClasspathEntry>> userEntries;
+    std::vector<std::unique_ptr<ClasspathEntry>> bootEntries;
+    std::vector<std::unique_ptr<ClasspathEntry>> extEntries;
+    std::vector<std::unique_ptr<ClasspathEntry>> userEntries;
 
     std::unordered_map<std::string, int> fileReadHistory;
 
 public:
+    ClassFileReader(const ClassFileReader &) = delete;
+
+    ClassFileReader &operator=(const ClassFileReader &) = delete;
+
     //初始化，也是启动的时候调用
     bool init(const std::string &jrePath, const std::string &classpath);
 

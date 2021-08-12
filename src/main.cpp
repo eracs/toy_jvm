@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     }
     initLogger(startArgs->debug);
     spdlog::get("Logger")->info("Start Run Toy JVM!");
-    auto class_file_reader = ClassFileReader::get_instance();
-    class_file_reader.init(startArgs->jre, startArgs->classpath);
+
+    ClassFileReader::get_instance().init(startArgs->jre, startArgs->classpath);
     return 0;
 }
