@@ -14,7 +14,7 @@ void addChildPackages(const std::string &path, std::vector<std::unique_ptr<Class
     listDirFiles(path, childFiles, childDirs);
     for (auto item : childFiles)
     {
-        if (item.second == "jar")
+        if (item.second == "jar" || item.second == "zip")
         {
             string absPath = path + "/" + item.first;
             container.push_back(make_unique<ZipClasspathEntry>(absPath));
@@ -62,11 +62,13 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
             {
                 auto realPath = path.substr(0, path.size() - 1);
                 ClassFileReader::userEntries.push_back(make_unique<DirClasspathEntry>(realPath));
+                addChildPackages(realPath, ClassFileReader::userEntries);
                 logger->info("ClassPath: add dir {0} ", realPath);
             }
             else
             {
                 ClassFileReader::userEntries.push_back(make_unique<DirClasspathEntry>(path));
+                addChildPackages(path, ClassFileReader::userEntries);
                 logger->info("ClassPath: add dir {0} ", path);
             }
         }
