@@ -16,9 +16,10 @@
 
 ----------
 
- 1.  [安装vcpkg](https://github.com/microsoft/vcpkg)
- 2.  [安装xmake](https://xmake.io/#/zh-cn/guide/installation)![Xmake](https://img.shields.io/badge/xmake-%3E%3Dv2.5.6-orange)
- 3.  clone代码到本地 
+ 1.  搭建C++编译环境
+ 2.  [安装vcpkg](https://github.com/microsoft/vcpkg)
+ 3.  [安装xmake](https://xmake.io/#/zh-cn/guide/installation)![Xmake](https://img.shields.io/badge/xmake-%3E%3Dv2.5.6-orange)
+ 4.  clone代码到本地 
    ```  git clone https://github.com/eracs/toy_jvm.git ```
  4.  使用xmake构建
    ```  xmake build   ```

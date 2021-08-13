@@ -33,3 +33,21 @@ u4 readNextU4(unsigned char *data, size_t &current_prt, size_t length)
     }
     return value;
 }
+
+/*
+    //example
+    size_t dataSize = 0;
+    size_t current_ptr = 0;
+    auto data = ClassFileReader::get_instance().readClass("test.Main", dataSize);
+    if (dataSize >= 10)
+    {
+        auto magicNumber = readNextU4(data, current_ptr, dataSize);
+        auto minor_version = readNextU2(data, current_ptr, dataSize);
+        auto major_version = readNextU2(data, current_ptr, dataSize);
+        auto constant_pool_count = readNextU2(data, current_ptr, dataSize);
+        spdlog::critical("magicNumber : {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", magicNumber);
+        spdlog::critical("minor_version : {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", minor_version);
+        spdlog::critical("major_version : {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", major_version);
+        spdlog::critical("constant_pool_count : {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", constant_pool_count);
+    }
+*/
