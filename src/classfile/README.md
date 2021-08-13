@@ -1,7 +1,7 @@
 ### 解析class文件
 -------
 #### class文件格式
-参见[《Java虚拟机规范（Java SE 8版）》](https://book.douban.com/subject/26418340/)第4章中第4.1节
+参见Java虚拟机规范（Java SE 8版）[第4章中第4.1节](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.1)
 > u1:1个字节(8bit)
 > u2:2个字节(16bit)
 > u4:4个字节(32bit)

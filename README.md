@@ -42,7 +42,7 @@
 #### 实现思路
 - [《自己动手写Java虚拟机》](https://book.douban.com/subject/26802084/)
 #### 虚拟机规范：
-- [《The Java® Virtual Machine Specification - Java SE 8 Edition》](https://book.douban.com/subject/26418340/) 
+- [《The Java® Virtual Machine Specification - Java SE 8 Edition》](https://docs.oracle.com/javase/specs/jvms/se8/html/) 
 - 中文版 [《Java虚拟机规范（Java SE 8版）》](https://book.douban.com/subject/26418340/) 
 #### 其他参考书目
 - [《深入理解Java虚拟机（第三版）》](https://book.douban.com/subject/34907497/)
