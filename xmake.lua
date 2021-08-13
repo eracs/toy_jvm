@@ -1,8 +1,9 @@
 add_rules("mode.debug", "mode.release")
 add_requires("vcpkg::kubazip", {alias = "kubazip"})
-add_requires("clara")
+add_requires("vcpkg::clara", {alias = clara})
 add_requires("vcpkg::tinydir", {alias = "tinydir"})
-add_requires("spdlog")
+add_requires("vcpkg::spdlog", {alias = "spdlog"})
+add_requires("vcpkg::fmt", {alias = "fmt"})
 
 target("toy_jvm")
     set_kind("binary")
@@ -13,11 +14,11 @@ target("toy_jvm")
     add_files("src/start/*.cpp")
     add_files("src/classpath/*.cpp")
     add_files("src/utils/*.cpp")
-    add_files("src/classfile/*.cpp")
-    add_packages("kubazip")
-    add_packages("clara")
     add_packages("tinydir")
     add_packages("spdlog")
+    add_packages("kubazip")
+    add_packages("clara")
+    add_packages("fmt")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
