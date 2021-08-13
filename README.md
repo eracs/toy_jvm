@@ -18,15 +18,10 @@
 
  1.  [安装vcpkg](https://github.com/microsoft/vcpkg)
  2.  [安装xmake](https://xmake.io/#/zh-cn/guide/installation)![Xmake](https://img.shields.io/badge/xmake-%3E%3Dv2.5.6-orange)
- 3.  clone代码到本地
-    ```
-    git clone https://github.com/eracs/toy_jvm.git 
-    ```
+ 3.  clone代码到本地 
+   ```  git clone https://github.com/eracs/toy_jvm.git ```
  4.  使用xmake构建
-    ```
-    xmake require
-    xmake build 
-    ```
+   ```  xmake build   ```
 
 ## 功能实现
 
@@ -44,8 +39,12 @@
 - [ ] 多线程
 ## 参考资料
 --------
+#### 实现思路
 - [《自己动手写Java虚拟机》](https://book.douban.com/subject/26802084/)
-- [《Java虚拟机规范（Java SE 8版）》](https://book.douban.com/subject/26418340/)
+#### 虚拟机规范：
+- [《The Java® Virtual Machine Specification - Java SE 8 Edition》](https://book.douban.com/subject/26418340/) 
+- 中文版 [《Java虚拟机规范（Java SE 8版）》](https://book.douban.com/subject/26418340/) 
+#### 其他参考书目
 - [《深入理解Java虚拟机（第三版）》](https://book.douban.com/subject/34907497/)
 - [《揭秘Java虚拟机》](https://book.douban.com/subject/27086821/)
 - [《垃圾回收的算法与实现》](https://book.douban.com/subject/26821357/)
