@@ -2,10 +2,6 @@
 -------
 #### class文件格式
 参见Java虚拟机规范（Java SE 8版）[第4章中第4.1节](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.1)
-> u1:1个字节(8bit)
-> u2:2个字节(16bit)
-> u4:4个字节(32bit)
-> 存储顺序为大端
 
 ```
 /*
@@ -28,7 +24,19 @@ ClassFile {
     attribute_info attributes[attributes_count];
 }
 */
+
 ```
+#### 解析思路
+------- 
+> u1:1个字节(8bit)
+> u2:2个字节(16bit)
+> u4:4个字节(32bit)
+
+-  设读入进来的数据是uint8 *data，使用一个current_prt标记当前应读取的位置。根据规范可知class文件是大端序。
+-  读取u1可以直接返回data[current_ptr++]
+-  读取u2依次将高位的u1左移8位加上低位的u1即可
+-  依次类推到读取u4
+
 #### magic（魔数）
 ----
 - MagicNumber一般用于标记文件的格式，放置于文件的开头（这也是改后缀名不会影响绝大多数软件判断文件的实际类型的原因）
