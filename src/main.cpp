@@ -4,7 +4,7 @@
 #include "spdlog/sinks/basic_file_sink.h"
 #include "start/start_args.h"
 #include "classpath/ClassFileReader.h"
-
+#include "classfile/ClassFile.h"
 #include "test/test.h"
 
 using namespace std;
@@ -46,6 +46,13 @@ int main(int argc, char **argv)
     spdlog::get("Logger")->info("Start Run Toy JVM!");
 
     ClassFileReader::get_instance().init(startArgs->jre, startArgs->classpath);
-
+    size_t dataSize = 0;
+    auto data = ClassFileReader::get_instance().readClass("java.lang.Object", dataSize);
+    int status = 0;
+    ClassFile cf{data, dataSize, status};
+    free(data);
+    spdlog::critical("magicNumber,hex:{0:x}", cf.getMagicNumber());
+    spdlog::info("minor_version:{0},major_version:{1},constant_pool_size:{2}", cf.getMinorVersion(), cf.getMajorVersion(), cf.getConstantPoolCount());
+    
     return 0;
 }

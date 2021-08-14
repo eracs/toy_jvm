@@ -1,35 +1,35 @@
 #include "class_reader.h"
 
-u1 readNextU1(unsigned char *data, size_t &current_prt, size_t length)
-{
-    if (current_prt <= length - 1)
-    {
-        return data[current_prt++];
+u1 readNextU1(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status) {
+    status = 0;
+    if (current_ptr <= length - 1) {
+        status = 1;
+        return data[current_ptr++];
     }
     return 0;
 }
 
-u2 readNextU2(unsigned char *data, size_t &current_prt, size_t length)
-{
+u2 readNextU2(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status) {
     u2 value = 0;
-    if (current_prt <= length - 2)
-    {
-        value += data[current_prt++] << 8;
-        value += data[current_prt++];
+    status = 0;
+    if (current_ptr <= length - 2) {
+        value += data[current_ptr++] << 8;
+        value += data[current_ptr++];
+        status = 1;
     }
 
     return value;
 }
 
-u4 readNextU4(unsigned char *data, size_t &current_prt, size_t length)
-{
+u4 readNextU4(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status) {
     u4 value = 0;
-    if (current_prt <= length - 4)
-    {
-        value += data[current_prt++] << 24;
-        value += data[current_prt++] << 16;
-        value += data[current_prt++] << 8;
-        value += data[current_prt++];
+    status = 0;
+    if (current_ptr <= length - 4) {
+        value += data[current_ptr++] << 24;
+        value += data[current_ptr++] << 16;
+        value += data[current_ptr++] << 8;
+        value += data[current_ptr++];
+        status = 1;
     }
     return value;
 }
