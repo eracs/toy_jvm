@@ -1,15 +1,16 @@
 #ifndef TOY_JVM_CONSTANTPOOL_H
 #define TOY_JVM_CONSTANTPOOL_H
 
-
 #include <vector>
 #include "ConstantInfo.h"
 #include "ConstantEmptyInfo.h"
 
-class ConstantPool {
+class ConstantPool
+{
 private:
     u2 constant_pool_count;
     std::vector<ConstantInfo> items;
+
 public:
     ConstantPool() = delete;
 
@@ -21,7 +22,8 @@ public:
     const std::vector<ConstantInfo> &getItems() const;
 
     ConstantInfo &operator[](int index);
-};
 
+    const ConstantInfo &operator[](int index) const;
+};
 
 #endif //TOY_JVM_CONSTANTPOOL_H

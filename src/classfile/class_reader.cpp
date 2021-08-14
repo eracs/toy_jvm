@@ -1,18 +1,22 @@
 #include "class_reader.h"
 
-u1 readNextU1(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status) {
+u1 readNextU1(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status)
+{
     status = 0;
-    if (current_ptr <= length - 1) {
+    if (current_ptr <= length - 1)
+    {
         status = 1;
         return data[current_ptr++];
     }
     return 0;
 }
 
-u2 readNextU2(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status) {
+u2 readNextU2(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status)
+{
     u2 value = 0;
     status = 0;
-    if (current_ptr <= length - 2) {
+    if (current_ptr <= length - 2)
+    {
         value += data[current_ptr++] << 8;
         value += data[current_ptr++];
         status = 1;
@@ -21,10 +25,12 @@ u2 readNextU2(const unsigned char *data, size_t &current_ptr, const size_t &leng
     return value;
 }
 
-u4 readNextU4(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status) {
+u4 readNextU4(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status)
+{
     u4 value = 0;
     status = 0;
-    if (current_ptr <= length - 4) {
+    if (current_ptr <= length - 4)
+    {
         value += data[current_ptr++] << 24;
         value += data[current_ptr++] << 16;
         value += data[current_ptr++] << 8;

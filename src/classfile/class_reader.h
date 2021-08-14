@@ -11,5 +11,4 @@ u2 readNextU2(const unsigned char *data, size_t &current_prt, const size_t &leng
 
 u4 readNextU4(const unsigned char *data, size_t &current_prt, const size_t &length, int &status);
 
-
 #endif //TOY_JVM_CLASS_READER_H
