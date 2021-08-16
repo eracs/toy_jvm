@@ -33,6 +33,32 @@ ClassFile::ClassFile(const unsigned char *data, const size_t &dataSize, int &sta
     {
         constantPool = nullptr;
     }
+    if (status)
+    {
+        access_flags = readNextU2(data, current_ptr, dataSize, status);
+    }
+    if (status)
+    {
+        this_class = readNextU2(data, current_ptr, dataSize, status);
+    }
+    if (status)
+    {
+        super_class = readNextU2(data, current_ptr, dataSize, status);
+    }
+    if (status)
+    {
+        interfaces_count = readNextU2(data, current_ptr, dataSize, status);
+    }
+    u2 i = 0;
+    while (status && i < interfaces_count)
+    {
+        interfaces.emplace_back(readNextU2(data, current_ptr, dataSize, status));
+        i++;
+    }
+    if (status)
+    {
+        fields_count = readNextU2(data, current_ptr, dataSize, status);
+    }
 }
 
 u4 ClassFile::getMagicNumber() const
