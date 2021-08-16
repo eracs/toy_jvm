@@ -116,9 +116,11 @@ void createConstantInfo(const unsigned char *data, size_t &current_ptr, const si
 ConstantPool::ConstantPool(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status,
                            const u2 &constant_pool_count) : constant_pool_count(constant_pool_count)
 {
-    while (status)
+    int i = 1;
+    while (status && i < constant_pool_count)
     {
         createConstantInfo(data, current_ptr, dataSize, status, ConstantPool::items);
+        i++;
     }
 }
 

@@ -47,12 +47,18 @@ int main(int argc, char **argv)
 
     ClassFileReader::get_instance().init(startArgs->jre, startArgs->classpath);
     size_t dataSize = 0;
-    auto data = ClassFileReader::get_instance().readClass("java.lang.Object", dataSize);
+    auto data = ClassFileReader::get_instance().readClass("test.Main", dataSize);
     int status = 0;
     ClassFile cf{data, dataSize, status};
     free(data);
     spdlog::critical("magicNumber,hex:{0:x}", cf.getMagicNumber());
     spdlog::info("minor_version:{0},major_version:{1},constant_pool_size:{2}", cf.getMinorVersion(), cf.getMajorVersion(), cf.getConstantPoolCount());
 
+    auto& v=cf.getConstantPool()->getItems();
+    int i=0;
+    for(auto &item:v){
+        i++;
+        spdlog::info("cp index {0}, cp tag {1}",i,item->getTag());
+    }
     return 0;
 }
