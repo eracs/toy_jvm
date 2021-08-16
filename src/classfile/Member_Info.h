@@ -1,8 +1,9 @@
 #ifndef TOY_JVM_MEMBERINFO_H
 #define TOY_JVM_MEMBERINFO_H
 
-#include <vector>
 #include "attribute_info/Attribute_Info.h"
+#include <vector>
+#include <memory>
 
 class Member_Info
 {
@@ -11,7 +12,7 @@ private:
     u2 name_index;
     u2 descriptor_index;
     u2 attributes_count;
-    std::vector<Attribute_Info> attributes;
+    std::vector<std::shared_ptr<Attribute_Info>> attributes;
 
 public:
     u2 getAccessFlags() const;
@@ -22,7 +23,7 @@ public:
 
     u2 getAttributesCount() const;
 
-    const std::vector<Attribute_Info> &getAttributes() const;
+    const std::vector<std::shared_ptr<Attribute_Info>> &getAttributes() const;
 };
 
 #endif //TOY_JVM_MEMBERINFO_H

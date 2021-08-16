@@ -20,7 +20,7 @@ u2 Member_Info::getAttributesCount() const
     return attributes_count;
 }
 
-const std::vector<Attribute_Info> &Member_Info::getAttributes() const
+const std::vector<std::shared_ptr<Attribute_Info>> &Member_Info::getAttributes() const
 {
     return attributes;
 }
