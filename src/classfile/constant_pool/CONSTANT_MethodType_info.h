@@ -3,7 +3,7 @@
 
 #include "ConstantInfo.h"
 
-class CONSTANT_MethodType_info : ConstantInfo
+class CONSTANT_MethodType_info : public ConstantInfo
 {
 private:
     u2 descriptor_index;

@@ -4,7 +4,7 @@
 #include "ConstantInfo.h"
 #include <string>
 
-class CONSTANT_Utf8_info : ConstantInfo
+class CONSTANT_Utf8_info : public ConstantInfo
 {
 private:
     u2 length;

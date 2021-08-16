@@ -3,7 +3,7 @@
 
 #include "ConstantInfo.h"
 
-class CONSTANT_Fieldref_info : ConstantInfo
+class CONSTANT_Fieldref_info : public ConstantInfo
 {
 private:
     u2 class_index;

@@ -3,7 +3,7 @@
 
 #include "ConstantInfo.h"
 
-class CONSTANT_MethodHandle_info : ConstantInfo
+class CONSTANT_MethodHandle_info :public ConstantInfo
 {
 private:
     u1 reference_kind;

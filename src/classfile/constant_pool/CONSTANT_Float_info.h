@@ -3,7 +3,7 @@
 
 #include "ConstantInfo.h"
 
-class CONSTANT_Float_info : ConstantInfo
+class CONSTANT_Float_info : public ConstantInfo
 {
 private:
     u4 bytes;

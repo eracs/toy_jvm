@@ -3,7 +3,7 @@
 
 #include "ConstantInfo.h"
 
-class CONSTANT_InvokeDynamic_info : ConstantInfo
+class CONSTANT_InvokeDynamic_info : public ConstantInfo
 {
 private:
     u2 bootstrap_method_attr_index;

@@ -62,8 +62,6 @@ ConstantPool *ClassFile::getConstantPool() const
 
 ClassFile::~ClassFile()
 {
-    if (constantPool != nullptr)
-    {
-        delete constantPool;
-    }
+
+    delete constantPool;
 }

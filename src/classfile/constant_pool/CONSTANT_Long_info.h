@@ -3,7 +3,7 @@
 
 #include "ConstantInfo.h"
 
-class CONSTANT_Long_info : ConstantInfo
+class CONSTANT_Long_info : public ConstantInfo
 {
 private:
     u4 high_bytes;

@@ -3,7 +3,7 @@
 
 #include "ConstantInfo.h"
 
-class CONSTANT_NameAndType_info : ConstantInfo
+class CONSTANT_NameAndType_info :public ConstantInfo
 {
 private:
     u2 name_index;
