@@ -2,13 +2,14 @@
 #define TOY_JVM_CONSTANTPOOL_H
 
 #include <vector>
+#include <memory>
 #include "ConstantInfo.h"
 
 class ConstantPool
 {
 private:
     u2 constant_pool_count;
-    std::vector<ConstantInfo> items;
+    std::vector<std::shared_ptr<ConstantInfo>> items;
 
 public:
     ConstantPool() = delete;
@@ -18,11 +19,11 @@ public:
 
     u2 getConstantPoolCount() const;
 
-    const std::vector<ConstantInfo> &getItems() const;
+    const std::vector<std::shared_ptr<ConstantInfo>> &getItems() const;
 
-    ConstantInfo &operator[](int index);
+    std::shared_ptr<ConstantInfo> operator[](int index);
 
-    const ConstantInfo &operator[](int index) const;
+    const std::shared_ptr<ConstantInfo> &operator[](int index) const;
 };
 
 #endif //TOY_JVM_CONSTANTPOOL_H

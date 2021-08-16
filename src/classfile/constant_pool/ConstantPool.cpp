@@ -19,7 +19,7 @@
 
 using namespace std;
 
-ConstantInfo createConstantInfo(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status)
+void createConstantInfo(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, vector<shared_ptr<ConstantInfo>> &container)
 {
     u1 tag = readNextU1(data, current_ptr, dataSize, status);
     if (status)
@@ -27,58 +27,58 @@ ConstantInfo createConstantInfo(const unsigned char *data, size_t &current_ptr, 
         if (tag == 7)
         {
             u2 name_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_Class_info(tag, name_index);
+            container.emplace_back(make_shared<CONSTANT_Class_info>(tag, name_index));
         }
         if (tag == 9)
         {
             u2 class_index = readNextU2(data, current_ptr, dataSize, status);
             u2 name_and_type_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_Fieldref_info(tag, class_index, name_and_type_index);
+            container.emplace_back(make_shared<CONSTANT_Fieldref_info>(tag, class_index, name_and_type_index));
         }
         if (tag == 10)
         {
             u2 class_index = readNextU2(data, current_ptr, dataSize, status);
             u2 name_and_type_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_Methodref_info(tag, class_index, name_and_type_index);
+            container.emplace_back(make_shared<CONSTANT_Methodref_info>(tag, class_index, name_and_type_index));
         }
         if (tag == 11)
         {
             u2 class_index = readNextU2(data, current_ptr, dataSize, status);
             u2 name_and_type_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_InterfaceMethodref_info(tag, class_index, name_and_type_index);
+            container.emplace_back(make_shared<CONSTANT_InterfaceMethodref_info>(tag, class_index, name_and_type_index));
         }
         if (tag == 8)
         {
             u2 string_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_String_info(tag, string_index);
+            container.emplace_back(make_shared<CONSTANT_String_info>(tag, string_index));
         }
         if (tag == 3)
         {
             u4 bytes = readNextU4(data, current_ptr, dataSize, status);
-            return CONSTANT_Integer_info(tag, bytes);
+            container.emplace_back(make_shared<CONSTANT_Integer_info>(tag, bytes));
         }
         if (tag == 4)
         {
             u4 bytes = readNextU4(data, current_ptr, dataSize, status);
-            return CONSTANT_Float_info(tag, bytes);
+            container.emplace_back(make_shared<CONSTANT_Float_info>(tag, bytes));
         }
         if (tag == 5)
         {
             u4 high_bytes = readNextU4(data, current_ptr, dataSize, status);
             u4 low_bytes = readNextU4(data, current_ptr, dataSize, status);
-            return CONSTANT_Long_info(tag, high_bytes, low_bytes);
+            container.emplace_back(make_shared<CONSTANT_Long_info>(tag, high_bytes, low_bytes));
         }
         if (tag == 6)
         {
             u4 high_bytes = readNextU4(data, current_ptr, dataSize, status);
             u4 low_bytes = readNextU4(data, current_ptr, dataSize, status);
-            return CONSTANT_Double_info(tag, high_bytes, low_bytes);
+            container.emplace_back(make_shared<CONSTANT_Double_info>(tag, high_bytes, low_bytes));
         }
         if (tag == 12)
         {
             u2 name_index = readNextU2(data, current_ptr, dataSize, status);
             u2 descriptor_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_NameAndType_info(tag, name_index, descriptor_index);
+            container.emplace_back(make_shared<CONSTANT_NameAndType_info>(tag, name_index, descriptor_index));
         }
         if (tag == 1)
         {
@@ -91,28 +91,26 @@ ConstantInfo createConstantInfo(const unsigned char *data, size_t &current_ptr, 
             str[length] = '\0';
             string utf8_str(str);
             delete[] str;
-            return CONSTANT_Utf8_info(tag, length, utf8_str);
+            container.emplace_back(make_shared<CONSTANT_Utf8_info>(tag, length, utf8_str));
         }
         if (tag == 15)
         {
             u1 reference_kind = readNextU1(data, current_ptr, dataSize, status);
             u2 reference_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_MethodHandle_info(tag, reference_kind, reference_index);
+            container.emplace_back(make_shared<CONSTANT_MethodHandle_info>(tag, reference_kind, reference_index));
         }
         if (tag == 16)
         {
             u2 descriptor_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_MethodType_info(tag, descriptor_index);
+            container.emplace_back(make_shared<CONSTANT_MethodType_info>(tag, descriptor_index));
         }
         if (tag == 18)
         {
             u2 bootstrap_method_attr_index = readNextU2(data, current_ptr, dataSize, status);
             u2 name_and_type_index = readNextU2(data, current_ptr, dataSize, status);
-            return CONSTANT_InvokeDynamic_info(tag, bootstrap_method_attr_index, name_and_type_index);
+            container.emplace_back(make_shared<CONSTANT_InvokeDynamic_info>(tag, bootstrap_method_attr_index, name_and_type_index));
         }
     }
-    status = 0;
-    return ConstantEmptyInfo::get_instance();
 }
 
 ConstantPool::ConstantPool(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status,
@@ -120,11 +118,11 @@ ConstantPool::ConstantPool(const unsigned char *data, size_t &current_ptr, const
 {
     while (status)
     {
-        items.emplace_back(createConstantInfo(data, current_ptr, dataSize, status));
+        createConstantInfo(data, current_ptr, dataSize, status, ConstantPool::items);
     }
 }
 
-const ConstantInfo &ConstantPool::operator[](int index) const
+const shared_ptr<ConstantInfo> &ConstantPool::operator[](int index) const
 {
     index--;
     if (index <= 0 || index >= items.size())
@@ -132,7 +130,7 @@ const ConstantInfo &ConstantPool::operator[](int index) const
     return items[index];
 }
 
-ConstantInfo &ConstantPool::operator[](int index)
+shared_ptr<ConstantInfo> ConstantPool::operator[](int index)
 {
     index--;
     if (index <= 0 || index >= items.size())
@@ -145,7 +143,7 @@ u2 ConstantPool::getConstantPoolCount() const
     return constant_pool_count;
 }
 
-const std::vector<ConstantInfo> &ConstantPool::getItems() const
+const vector<shared_ptr<ConstantInfo>> &ConstantPool::getItems() const
 {
     return items;
 }
