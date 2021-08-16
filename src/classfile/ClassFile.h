@@ -15,6 +15,7 @@ private:
 public:
     ClassFile() = delete;
 
+    //class file is broken when status is 0
     ClassFile(const unsigned char *data, const size_t &dataSize, int &status);
 
     u4 getMagicNumber() const;

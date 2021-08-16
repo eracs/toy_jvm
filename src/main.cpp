@@ -53,6 +53,6 @@ int main(int argc, char **argv)
     free(data);
     spdlog::critical("magicNumber,hex:{0:x}", cf.getMagicNumber());
     spdlog::info("minor_version:{0},major_version:{1},constant_pool_size:{2}", cf.getMinorVersion(), cf.getMajorVersion(), cf.getConstantPoolCount());
-    
+
     return 0;
 }

@@ -2,24 +2,29 @@
 
 u1 readNextU1(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status)
 {
-    status = 0;
+
     if (current_ptr <= length - 1)
     {
         status = 1;
         return data[current_ptr++];
     }
+    status = 0;
     return 0;
 }
 
 u2 readNextU2(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status)
 {
     u2 value = 0;
-    status = 0;
+
     if (current_ptr <= length - 2)
     {
         value += data[current_ptr++] << 8;
         value += data[current_ptr++];
         status = 1;
+    }
+    else
+    {
+        status = 0;
     }
 
     return value;
@@ -28,7 +33,7 @@ u2 readNextU2(const unsigned char *data, size_t &current_ptr, const size_t &leng
 u4 readNextU4(const unsigned char *data, size_t &current_ptr, const size_t &length, int &status)
 {
     u4 value = 0;
-    status = 0;
+
     if (current_ptr <= length - 4)
     {
         value += data[current_ptr++] << 24;
@@ -36,6 +41,10 @@ u4 readNextU4(const unsigned char *data, size_t &current_ptr, const size_t &leng
         value += data[current_ptr++] << 8;
         value += data[current_ptr++];
         status = 1;
+    }
+    else
+    {
+        status = 0;
     }
     return value;
 }

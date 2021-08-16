@@ -1,3 +1,5 @@
+set_xmakever("2.5.6")
+
 add_rules("mode.debug", "mode.release")
 add_requires("vcpkg::kubazip", {alias = "kubazip"})
 add_requires("vcpkg::clara", {alias = clara})
