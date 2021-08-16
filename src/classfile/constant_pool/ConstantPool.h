@@ -3,10 +3,9 @@
 
 #include <vector>
 #include "ConstantInfo.h"
-#include "ConstantEmptyInfo.h"
 
-class ConstantPool
-{
+
+class ConstantPool {
 private:
     u2 constant_pool_count;
     std::vector<ConstantInfo> items;

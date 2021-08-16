@@ -1,4 +1,5 @@
 #include "ClassFile.h"
+#include "class_reader.h"
 
 ClassFile::ClassFile(const unsigned char *data, const size_t &dataSize, int &status)
 {

@@ -1,10 +1,11 @@
 #ifndef TOY_JVM_CONSTANTINFO_H
 #define TOY_JVM_CONSTANTINFO_H
 
-#include "../class_reader.h"
+using u1 = unsigned char;
+using u2 = unsigned short;
+using u4 = unsigned int;
 
-class ConstantInfo
-{
+class ConstantInfo {
 private:
     u1 tag;
 
