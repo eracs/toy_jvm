@@ -4,8 +4,8 @@
 #include <vector>
 #include "ConstantInfo.h"
 
-
-class ConstantPool {
+class ConstantPool
+{
 private:
     u2 constant_pool_count;
     std::vector<ConstantInfo> items;
