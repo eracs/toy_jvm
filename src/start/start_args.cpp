@@ -39,7 +39,6 @@ void printHelpInfo(const std::string &left, const std::string &right)
     cout << " " << right << endl;
 }
 
-
 StartArgs *parseArgs(int argc, char *argv[])
 {
 
@@ -102,7 +101,13 @@ StartArgs *parseArgs(int argc, char *argv[])
     }
     if (jrepath == "")
     {
-        std::string javahome(getenv("JAVA_HOME"));
+        auto jenv = getenv("JAVA_HOME");
+        if (jenv == NULL)
+        {
+            cerr << "The jre path cannot be empty" << endl;
+            return nullptr;
+        }
+        std::string javahome(jenv);
         if (javahome.empty())
         {
             cerr << "The jre path cannot be empty" << endl;
