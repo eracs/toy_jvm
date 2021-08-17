@@ -31,6 +31,9 @@ jobs:
       - name: clean xrepo cache
         run: xrepo clean
         
+      - name: update xrepo
+        run: xrepo update-repo
+
       - name: download packages
         run: xmake require -y
 
