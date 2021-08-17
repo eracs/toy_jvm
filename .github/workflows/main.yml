@@ -28,11 +28,17 @@ jobs:
       - name: set xmake and vcpkg
         run: xmake g --vcpkg=${{env.VCPKG_ROOT}}
 
+      - name: clean xrepo cache
+        run: xrepo clean
+        
       - name: download packages
         run: xmake require -y
 
+      - name: clean build cache
+        run: xmake clean
+
       - name: build
-        run: xmake build -y
+        run: xmake build
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
