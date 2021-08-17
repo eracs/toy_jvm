@@ -1,7 +1,7 @@
 set_xmakever("2.5.6")
 
 add_rules("mode.debug", "mode.release")
-add_requires("fmt 8.0.0")
+add_requires("fmt 8.0.*")
 add_requires("vcpkg::kubazip 0.1.19", {alias = "kubazip"})
 add_requires("clara 1.1.5")
 add_requires("vcpkg::tinydir 1.2.4", {alias = "tinydir"})
