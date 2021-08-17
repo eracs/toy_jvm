@@ -1,11 +1,11 @@
 set_xmakever("2.5.6")
 
 add_rules("mode.debug", "mode.release")
+add_requires("fmt 8.0.0")
 add_requires("vcpkg::kubazip 0.1.19", {alias = "kubazip"})
-add_requires("vcpkg::clara 1.1.5", {alias = clara})
+add_requires("clara 1.1.5")
 add_requires("vcpkg::tinydir 1.2.4", {alias = "tinydir"})
-add_requires("vcpkg::spdlog", {alias = "spdlog"})
-add_requires("vcpkg::fmt", {alias = "fmt"})
+add_requires("spdlog 1.8.5")
 
 target("toy_jvm")
     set_kind("binary")
