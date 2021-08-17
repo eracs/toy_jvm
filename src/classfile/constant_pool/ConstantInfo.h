@@ -1,9 +1,7 @@
 #ifndef TOY_JVM_CONSTANTINFO_H
 #define TOY_JVM_CONSTANTINFO_H
 
-using u1 = unsigned char;
-using u2 = unsigned short;
-using u4 = unsigned int;
+#include "../../type_format.h"
 
 class ConstantInfo
 {
