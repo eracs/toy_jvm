@@ -6,10 +6,12 @@
 class CONSTANT_Integer_info : public ConstantInfo
 {
 private:
-    int value;
+    u4 bytes;
 
 public:
     CONSTANT_Integer_info(u1 tag, u4 bytes);
+
+    u4 getBytes() const;
 
     int getValue() const;
 };
