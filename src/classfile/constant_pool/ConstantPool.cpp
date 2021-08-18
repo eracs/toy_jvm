@@ -127,7 +127,7 @@ ConstantPool::ConstantPool(const unsigned char *data, size_t &current_ptr, const
 const shared_ptr<ConstantInfo> &ConstantPool::operator[](int index) const
 {
     index--;
-    if (index <= 0 || index >= items.size())
+    if (index < 0 || index >= items.size())
         return ConstantEmptyInfo::get_instance();
     return items[index];
 }
@@ -135,7 +135,7 @@ const shared_ptr<ConstantInfo> &ConstantPool::operator[](int index) const
 shared_ptr<ConstantInfo> ConstantPool::operator[](int index)
 {
     index--;
-    if (index <= 0 || index >= items.size())
+    if (index < 0 || index >= items.size())
         return ConstantEmptyInfo::get_instance();
     return items[index];
 }
