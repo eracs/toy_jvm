@@ -31,9 +31,9 @@ void testLoadClass()
 
 void run_test()
 {
-    float magic = 1234.5677;
+    double magic = 456789.123456;
     auto p = (unsigned char *)&magic;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 8; i++)
     {
         printf("Memory address: %p\n", p + i);
         spdlog::critical("int: {0:d};  hex: {0:x}; bin: {0:b}", p[i]);
@@ -41,12 +41,12 @@ void run_test()
     cout << sizeof(float) << endl;
     cout << sizeof(double) << endl;
 
-    u1 data[4];
-    data[0] = 0x2b;
-    data[1] = 0x52;
-    data[2] = 0x9a;
-    data[3] = 0x44;
+    // u1 data[4];
+    // data[0] = 0x2b;
+    // data[1] = 0x52;
+    // data[2] = 0x9a;
+    // data[3] = 0x44;
 
-    cout<<*reinterpret_cast<float *>(data)<<endl;
-    cout<<magic<<endl;
+    // cout<<*reinterpret_cast<float *>(data)<<endl;
+    printf("%lf", magic);
 }
