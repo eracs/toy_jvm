@@ -14,4 +14,5 @@ int main(int argc, char **argv)
         return 0;
     }
     init(startArgs);
+    run_test();
 }

@@ -3,12 +3,12 @@
 #include "../classfile/ClassFile.h"
 #include "../classfile/constant_pool/CONSTANT_Methodref_info.h"
 #include "spdlog/spdlog.h"
+#include "iostream"
 
 using namespace std;
 
-void run_test()
+void testLoadClass()
 {
-
     size_t dataSize = 0;
     auto data = ClassFileReader::get_instance().readClass("test.Main", dataSize);
     int status = 0;
@@ -27,4 +27,26 @@ void run_test()
     ConstantInfo *ptr = v[0].get();
     CONSTANT_Methodref_info *ptr2 = static_cast<CONSTANT_Methodref_info *>(ptr);
     spdlog::info("test tag {0} ,cIndex {1}, nIndex {2}", ptr2->getTag(), ptr2->getClassIndex(), ptr2->getNameAndTypeIndex());
+}
+
+void run_test()
+{
+    float magic = 1234.5677;
+    auto p = (unsigned char *)&magic;
+    for (int i = 0; i < 4; i++)
+    {
+        printf("Memory address: %p\n", p + i);
+        spdlog::critical("int: {0:d};  hex: {0:x}; bin: {0:b}", p[i]);
+    }
+    cout << sizeof(float) << endl;
+    cout << sizeof(double) << endl;
+
+    u1 data[4];
+    data[0] = 0x2b;
+    data[1] = 0x52;
+    data[2] = 0x9a;
+    data[3] = 0x44;
+
+    cout<<*reinterpret_cast<float *>(data)<<endl;
+    cout<<magic<<endl;
 }

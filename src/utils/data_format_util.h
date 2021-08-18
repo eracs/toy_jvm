@@ -5,6 +5,6 @@
 
 int u4toInt(u4 bytes);
 
-
+float u4toFloat(u4 bytes);
 
 #endif
