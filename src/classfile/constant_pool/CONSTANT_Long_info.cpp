@@ -17,7 +17,7 @@ u4 CONSTANT_Long_info::getLowBytes() const
     return low_bytes;
 }
 
-uint64_t CONSTANT_Long_info::getValue() const
+long long CONSTANT_Long_info::getValue() const
 {
-    return value;
+    return uint64ToLong(value);
 }

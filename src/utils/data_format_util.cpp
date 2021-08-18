@@ -18,6 +18,11 @@ uint64_t mergeToLong(u4 high_bytes, u4 low_bytes)
     return result;
 }
 
+long long uint64ToLong(uint64_t value)
+{
+    return *reinterpret_cast<long long *>(&value);
+}
+
 double uint64ToDouble(uint64_t value)
 {
     return *reinterpret_cast<double *>(&value);

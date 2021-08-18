@@ -17,7 +17,7 @@ public:
 
     u4 getLowBytes() const;
 
-    uint64_t getValue() const;
+    long long getValue() const;
 };
 
 #endif //TOY_JVM_CONSTANT_LONG_INFO_H
