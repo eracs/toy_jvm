@@ -68,8 +68,6 @@ void createConstantInfo(const unsigned char *data, size_t &current_ptr, const si
             u4 low_bytes = readNextU4(data, current_ptr, dataSize, status);
             container.emplace_back(make_shared<CONSTANT_Long_info>(tag, high_bytes, low_bytes));
             // then the next usable item in the pool is located at index n+2. The constant_pool index n+1 must be valid but is considered unusable.
-            // !!! In retrospect, making 8-byte constants take two constant pool entries was a poor choice.
-            // hahahahahaha
             container.emplace_back(ConstantEmptyInfo::get_instance());
         }
         if (tag == 6)
