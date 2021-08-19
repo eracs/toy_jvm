@@ -27,7 +27,7 @@ private:
 public:
     ClassFile() = delete;
 
-    //class file is broken when status is 0
+    //status=0表示class文件读取失败/不完整
     ClassFile(const unsigned char *data, const size_t &dataSize, int &status);
 
     u4 getMagicNumber() const;

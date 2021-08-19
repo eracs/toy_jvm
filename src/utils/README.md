@@ -2,3 +2,6 @@
 ---------
 #### 字符串工具类（string_utils)
 提供startWith,endWith,replace等功能，另外将一些字符串常量放入其中
+
+#### 数据转换工具类
+提供数值转换功能

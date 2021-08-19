@@ -42,8 +42,7 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
     logger->debug("ClassPath: extpath is {0} ", extpath);
     addChildPackages(extpath, ClassFileReader::extEntries);
 
-    
-    auto cpParams = split(classpath, get_param_separator());
+        auto cpParams = split(classpath, get_param_separator());
     for (auto &path : cpParams)
     {
         logger->debug("ClassPath: start add classpath {0} ", path);
@@ -83,6 +82,7 @@ bool ClassFileReader::init(const std::string &jrePath, const std::string &classp
 uint8 *ClassFileReader::readClass(const std::string &className, size_t &length)
 {
     uint8 *data = nullptr;
+    //先从文件读取历史里看下能否直接定位到路径
     if (ClassFileReader::fileReadHistory.find(className) != ClassFileReader::fileReadHistory.end())
     {
         auto p = ClassFileReader::fileReadHistory[className];
@@ -121,7 +121,7 @@ uint8 *ClassFileReader::readClass(const std::string &className, size_t &length)
         }
         return data;
     }
-
+    //从启动类路径到拓展类路径到用户类路径依次遍历找类名
     for (auto &entry : ClassFileReader::bootEntries)
     {
         data = entry->readClass(className, length);
