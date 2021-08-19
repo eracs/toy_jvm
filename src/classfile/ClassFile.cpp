@@ -1,5 +1,6 @@
 #include "ClassFile.h"
 #include "class_reader.h"
+#include "attribute_info/attribute_info_factory.h"
 
 ClassFile::ClassFile(const unsigned char *data, const size_t &dataSize, int &status)
 {
@@ -55,9 +56,42 @@ ClassFile::ClassFile(const unsigned char *data, const size_t &dataSize, int &sta
         interfaces.emplace_back(readNextU2(data, current_ptr, dataSize, status));
         i++;
     }
+
     if (status)
     {
         fields_count = readNextU2(data, current_ptr, dataSize, status);
+    }
+    i = 0;
+    while (status && i < fields_count && constantPool != nullptr)
+    {
+        fields.emplace_back(std::make_shared<Member_Info>(data, current_ptr, dataSize, status, constantPool));
+        i++;
+    }
+
+    if (status)
+    {
+        methods_count = readNextU2(data, current_ptr, dataSize, status);
+    }
+    i = 0;
+    while (status && i < methods_count && constantPool != nullptr)
+    {
+        methods.emplace_back(std::make_shared<Member_Info>(data, current_ptr, dataSize, status, constantPool));
+        i++;
+    }
+
+    if (status)
+    {
+        attributes_count = readNextU2(data, current_ptr, dataSize, status);
+    }
+    i = 0;
+    while (status && i < attributes_count)
+    {
+        attributes.emplace_back(createAttributeInfo(data, current_ptr, dataSize, status, constantPool));
+        i++;
+    }
+    if (current_ptr != dataSize - 1)
+    {
+        status = 0;
     }
 }
 
