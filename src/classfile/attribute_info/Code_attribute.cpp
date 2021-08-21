@@ -8,18 +8,13 @@ Code_attribute::Code_attribute(std::string attributeName, u4 attributeLength, co
 {
 
     u4 end = current_ptr + attributeLength;
-    if (status)
-    {
-        max_stack = readNextU2(data, current_ptr, dataSize, status);
-    }
-    if (status)
-    {
-        max_locals = readNextU2(data, current_ptr, dataSize, status);
-    }
-    if (status)
-    {
-        code_length = readNextU4(data, current_ptr, dataSize, status);
-    }
+
+    max_stack = readNextU2(data, current_ptr, dataSize, status);
+
+    max_locals = readNextU2(data, current_ptr, dataSize, status);
+
+    code_length = readNextU4(data, current_ptr, dataSize, status);
+
     u4 i = 0;
     while (i < code_length && status)
     {
@@ -27,39 +22,21 @@ Code_attribute::Code_attribute(std::string attributeName, u4 attributeLength, co
         i++;
     }
 
-    if (status)
-    {
-        exception_table_length = readNextU2(data, current_ptr, dataSize, status);
-    }
+    exception_table_length = readNextU2(data, current_ptr, dataSize, status);
+
     i = 0;
     while (i < code_length && status)
     {
-        u2 start_pc;
-        u2 end_pc;
-        u2 handler_pc;
-        u2 catch_type;
-        start_pc = readNextU2(data, current_ptr, dataSize, status);
-        if (status)
-        {
-            end_pc = readNextU2(data, current_ptr, dataSize, status);
-        }
-        if (status)
-        {
-            handler_pc = readNextU2(data, current_ptr, dataSize, status);
-        }
-        if (status)
-        {
-            catch_type = readNextU2(data, current_ptr, dataSize, status);
-        }
-        if (status)
-        {
-            exception_table.emplace_back(std::make_shared<Exception_Table>(start_pc, end_pc, handler_pc, catch_type));
-        }
+        u2 start_pc = readNextU2(data, current_ptr, dataSize, status);
+        u2 end_pc = readNextU2(data, current_ptr, dataSize, status);
+        u2 handler_pc = readNextU2(data, current_ptr, dataSize, status);
+        u2 catch_type = readNextU2(data, current_ptr, dataSize, status);
+
+        exception_table.emplace_back(std::make_shared<Exception_Table>(start_pc, end_pc, handler_pc, catch_type));
     }
-    if (status)
-    {
-        attributes_count = readNextU2(data, current_ptr, dataSize, status);
-    }
+
+    attributes_count = readNextU2(data, current_ptr, dataSize, status);
+
     i = 0;
     while (status && i < attributes_count)
     {

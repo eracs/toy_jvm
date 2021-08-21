@@ -2,10 +2,10 @@
 
 u1 readNextU1(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status)
 {
-
+    if (!status)
+        return 0;
     if (current_ptr <= dataSize - 1)
     {
-        status = 1;
         return data[current_ptr++];
     }
     status = 0;
@@ -16,11 +16,12 @@ u2 readNextU2(const unsigned char *data, size_t &current_ptr, const size_t &data
 {
     u2 value = 0;
 
+    if (!status)
+        return value;
     if (current_ptr <= dataSize - 2)
     {
         value += data[current_ptr++] << 8;
         value += data[current_ptr++];
-        status = 1;
     }
     else
     {
@@ -34,13 +35,14 @@ u4 readNextU4(const unsigned char *data, size_t &current_ptr, const size_t &data
 {
     u4 value = 0;
 
+    if (!status)
+        return value;
     if (current_ptr <= dataSize - 4)
     {
         value += data[current_ptr++] << 24;
         value += data[current_ptr++] << 16;
         value += data[current_ptr++] << 8;
         value += data[current_ptr++];
-        status = 1;
     }
     else
     {

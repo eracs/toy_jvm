@@ -29,22 +29,15 @@ const std::vector<std::shared_ptr<Attribute_Info>> &Member_Info::getAttributes()
 
 Member_Info::Member_Info(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, ConstantPool *constantPool)
 {
-    if (status)
-    {
-        access_flags = readNextU2(data, current_ptr, dataSize, status);
-    }
-    if (status)
-    {
-        name_index = readNextU2(data, current_ptr, dataSize, status);
-    }
-    if (status)
-    {
-        descriptor_index = readNextU2(data, current_ptr, dataSize, status);
-    }
-    if (status)
-    {
-        attributes_count = readNextU2(data, current_ptr, dataSize, status);
-    }
+
+    access_flags = readNextU2(data, current_ptr, dataSize, status);
+
+    name_index = readNextU2(data, current_ptr, dataSize, status);
+
+    descriptor_index = readNextU2(data, current_ptr, dataSize, status);
+
+    attributes_count = readNextU2(data, current_ptr, dataSize, status);
+
     u2 i = 0;
     while (status && i < attributes_count)
     {
