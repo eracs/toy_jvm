@@ -5,13 +5,13 @@
 #include <memory>
 #include "../constant_pool/ConstantInfo.h"
 
-class ConstantValue_attribute
+class ConstantValue_attribute : public Attribute_Info
 {
 private:
     std::shared_ptr<ConstantInfo> constantInfo;
 
 public:
-    ConstantValue_attribute(std::shared_ptr<ConstantInfo> constantInfo);
+    ConstantValue_attribute(std::string attributeName, u4 attributeLength, std::shared_ptr<ConstantInfo> constantInfo);
 
     std::shared_ptr<ConstantInfo> getLinkedConstantInfo() const;
 };
