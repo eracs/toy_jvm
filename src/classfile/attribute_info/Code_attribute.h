@@ -2,7 +2,6 @@
 #define TOY_JVM_CODE_ATTRIBUTE_H
 
 #include "Attribute_Info.h"
-#include "../../type_format.h"
 #include <vector>
 #include <memory>
 #include "../constant_pool/ConstantPool.h"

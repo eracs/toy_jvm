@@ -1,8 +1,8 @@
 #ifndef TOY_JVM_ATTRIBUTE_INFO_H
 #define TOY_JVM_ATTRIBUTE_INFO_H
 
-#include "../class_reader.h"
 #include <string>
+#include "../../type_format.h"
 
 class Attribute_Info
 {

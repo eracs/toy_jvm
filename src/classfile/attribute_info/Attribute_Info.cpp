@@ -1,4 +1,5 @@
 #include "Attribute_Info.h"
+#include "../class_reader.h"
 
 Attribute_Info::Attribute_Info(std::string attributeName, u4 attributeLength) : attributeName(std::move(attributeName)), attributeLength(attributeLength) {}
 
