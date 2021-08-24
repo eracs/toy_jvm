@@ -1,4 +1,5 @@
 #include "class_reader.h"
+#include "spdlog/spdlog.h"
 
 u1 readNextU1(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status)
 {
@@ -8,6 +9,7 @@ u1 readNextU1(const unsigned char *data, size_t &current_ptr, const size_t &data
     {
         return data[current_ptr++];
     }
+      spdlog::get("Logger")->warn("readU1 failed in postion {0}", current_ptr);
     status = 0;
     return 0;
 }
@@ -25,6 +27,7 @@ u2 readNextU2(const unsigned char *data, size_t &current_ptr, const size_t &data
     }
     else
     {
+        spdlog::get("Logger")->warn("readU2 failed in postion {0}", current_ptr);
         status = 0;
     }
 
@@ -46,6 +49,7 @@ u4 readNextU4(const unsigned char *data, size_t &current_ptr, const size_t &data
     }
     else
     {
+         spdlog::get("Logger")->warn("readU4 failed in postion {0}", current_ptr);
         status = 0;
     }
     return value;
