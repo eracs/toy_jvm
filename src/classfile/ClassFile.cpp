@@ -24,7 +24,7 @@ ClassFile::ClassFile(const unsigned char *data, const size_t &dataSize, int &sta
 
         if (status)
         {
-            constantPool = new ConstantPool(data, current_ptr, dataSize, status, constant_pool_count);
+            constantPool = std::make_shared<ConstantPool>(data, current_ptr, dataSize, status, constant_pool_count);
         }
         else
         {
@@ -104,13 +104,7 @@ u2 ClassFile::getConstantPoolCount() const
     return constant_pool_count;
 }
 
-ConstantPool *ClassFile::getConstantPool() const
+std::shared_ptr<ConstantPool> ClassFile::getConstantPool() const
 {
     return constantPool;
-}
-
-ClassFile::~ClassFile()
-{
-
-    delete constantPool;
 }

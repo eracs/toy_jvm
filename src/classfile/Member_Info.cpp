@@ -27,7 +27,7 @@ const std::vector<std::shared_ptr<Attribute_Info>> &Member_Info::getAttributes()
     return attributes;
 }
 
-Member_Info::Member_Info(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, ConstantPool *constantPool)
+Member_Info::Member_Info(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, std::shared_ptr<ConstantPool> constantPool)
 {
 
     access_flags = readNextU2(data, current_ptr, dataSize, status);

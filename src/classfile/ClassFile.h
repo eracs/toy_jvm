@@ -11,7 +11,7 @@ private:
     u2 minor_version;
     u2 major_version;
     u2 constant_pool_count;
-    ConstantPool *constantPool;
+    std::shared_ptr<ConstantPool> constantPool;
     u2 access_flags;
     u2 this_class;
     u2 super_class;
@@ -38,9 +38,8 @@ public:
 
     u2 getConstantPoolCount() const;
 
-    ConstantPool *getConstantPool() const;
+    std::shared_ptr<ConstantPool> getConstantPool() const;
 
-    virtual ~ClassFile();
 };
 
 #endif //TOY_JVM_CLASSFILE_H

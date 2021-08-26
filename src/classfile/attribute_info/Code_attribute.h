@@ -34,7 +34,7 @@ private:
 
 public:
     Code_attribute() = delete;
-    Code_attribute(std::string attributeName, u4 attributeLength, const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, ConstantPool *contantPool);
+    Code_attribute(std::string attributeName, u4 attributeLength, const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, std::shared_ptr<ConstantPool> contantPool);
 };
 
 #endif

@@ -18,7 +18,7 @@ private:
 public:
     Member_Info() = delete;
 
-    Member_Info(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, ConstantPool *constantPool);
+    Member_Info(const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, std::shared_ptr<ConstantPool> constantPool);
 
     u2 getAccessFlags() const;
 
