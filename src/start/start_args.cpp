@@ -39,7 +39,7 @@ void printHelpInfo(const std::string &left, const std::string &right)
     cout << " " << right << endl;
 }
 
-StartArgs *parseArgs(int argc, char *argv[])
+std::shared_ptr<StartArgs> parseArgs(int argc, char *argv[])
 {
 
     bool help = false;
@@ -54,7 +54,7 @@ StartArgs *parseArgs(int argc, char *argv[])
     auto pathParse = Opt(classpath, "CLASSPATH")["-cp"]["-classpath"]["--classpath"]("Set the classpath, default is current path") |
                      Opt(jrepath, "JAVA_RUNTIME")["-jre"]["--jre"]["--xjre"]("Set the jre path, could be JAVA_HOME/jre") |
                      Opt(debug)["-d"]["-debug"]["--log"]("Show the debug info.");
-
+    std::shared_ptr<StartArgs> emptyPtr(nullptr);
     if (helpParse.parse(Args(argc, argv)))
     {
         if (help)
@@ -74,7 +74,7 @@ StartArgs *parseArgs(int argc, char *argv[])
                 printHelpInfo(v.left, v.right);
             }
 
-            return nullptr;
+            return emptyPtr;
         }
     }
     if (versionParse.parse(Args(argc, argv)))
@@ -82,10 +82,9 @@ StartArgs *parseArgs(int argc, char *argv[])
         if (version)
         {
             showVersion();
-            return nullptr;
+            return emptyPtr;
         }
     }
-    auto startArgs = new StartArgs;
 
     if (pathParse.parse(Args(argc, argv)))
     {
@@ -105,13 +104,13 @@ StartArgs *parseArgs(int argc, char *argv[])
         if (jenv == NULL)
         {
             cerr << "The jre path cannot be empty" << endl;
-            return nullptr;
+            return emptyPtr;
         }
         std::string javahome(jenv);
         if (javahome.empty())
         {
             cerr << "The jre path cannot be empty" << endl;
-            return nullptr;
+            return emptyPtr;
         }
         else
         {
@@ -126,8 +125,22 @@ StartArgs *parseArgs(int argc, char *argv[])
         }
     }
 
-    startArgs->classpath = classpath;
-    startArgs->jre = jrepath;
-    startArgs->debug = debug;
-    return startArgs;
+    return std::make_shared<StartArgs>(classpath, jrepath, debug);
+}
+
+StartArgs::StartArgs(std::string classpath, std::string jre, bool debug) : classpath(classpath), jre(jre), debug(debug) {}
+
+const std::string &StartArgs::getClasspath() const
+{
+    return classpath;
+}
+
+const std::string &StartArgs::getJrePath() const
+{
+    return jre;
+}
+
+const bool StartArgs::isDebugMode() const
+{
+    return debug;
 }

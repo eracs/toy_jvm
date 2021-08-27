@@ -1,3 +1,4 @@
 #include "start_args.h"
+#include <memory>
 
-void init(StartArgs* startArgs);
+void init(std::shared_ptr<StartArgs> startArgs);
