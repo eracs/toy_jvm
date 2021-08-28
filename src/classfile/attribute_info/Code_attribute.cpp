@@ -48,3 +48,43 @@ Code_attribute::Code_attribute(std::string attributeName, u4 attributeLength, co
         status = 0;
     }
 }
+
+u2 Code_attribute::getMaxStack() const
+{
+    return max_stack;
+}
+
+u2 Code_attribute::getMaxLocals() const
+{
+    return max_locals;
+}
+
+u4 Code_attribute::getCodeLength() const
+{
+    return code_length;
+}
+
+std::vector<u1> Code_attribute::getCodes() const
+{
+    return code;
+}
+
+u2 Code_attribute::getExceptionTableLength() const
+{
+    return exception_table_length;
+}
+
+std::vector<std::shared_ptr<Exception_Table>> Code_attribute::getExceptionTable() const
+{
+    return exception_table;
+}
+
+u2 Code_attribute::getAttributesCount() const
+{
+    return attributes_count;
+}
+
+std::vector<std::shared_ptr<Attribute_Info>> Code_attribute::getAttributes() const
+{
+    return attributes;
+}

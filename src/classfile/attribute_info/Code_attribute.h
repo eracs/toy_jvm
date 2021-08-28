@@ -35,6 +35,15 @@ private:
 public:
     Code_attribute() = delete;
     Code_attribute(std::string attributeName, u4 attributeLength, const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, std::shared_ptr<ConstantPool> contantPool);
+
+    u2 getMaxStack() const;
+    u2 getMaxLocals() const;
+    u4 getCodeLength() const;
+    std::vector<u1> getCodes() const;
+    u2 getExceptionTableLength() const;
+    std::vector<std::shared_ptr<Exception_Table>> getExceptionTable() const;
+    u2 getAttributesCount() const;
+    std::vector<std::shared_ptr<Attribute_Info>> getAttributes() const;
 };
 
 #endif
