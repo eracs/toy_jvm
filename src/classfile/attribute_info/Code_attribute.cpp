@@ -4,6 +4,26 @@
 
 Exception_Table::Exception_Table(u2 start_pc, u2 end_pc, u2 handler_pc, u2 catch_type) : start_pc(start_pc), end_pc(end_pc), handler_pc(handler_pc), catch_type(catch_type) {}
 
+u2 Exception_Table::getStartPc() const
+{
+    return start_pc;
+}
+
+u2 Exception_Table::getEndPc() const
+{
+    return end_pc;
+}
+
+u2 Exception_Table::getHandlerPc() const
+{
+    return handler_pc;
+}
+
+u2 Exception_Table::getCatchType() const
+{
+    return catch_type;
+}
+
 Code_attribute::Code_attribute(std::string attributeName, u4 attributeLength, const unsigned char *data, size_t &current_ptr, const size_t &dataSize, int &status, std::shared_ptr<ConstantPool> constantPool) : Attribute_Info(attributeName, attributeLength)
 {
 
