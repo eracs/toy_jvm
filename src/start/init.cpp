@@ -34,6 +34,6 @@ void initLogger(bool debug)
 void init(std::shared_ptr<StartArgs> startArgs)
 {
     initLogger(startArgs->isDebugMode());
-    ClassFileReader::get_instance().init(startArgs->getClasspath(), startArgs->getJrePath());
+    ClassFileReader::get_instance().init(startArgs->getJrePath(), startArgs->getClasspath());
     spdlog::get("Logger")->info("Start Run Toy JVM!");
 }
