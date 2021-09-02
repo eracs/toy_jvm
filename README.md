@@ -2,15 +2,7 @@
 ----------
 ![GitHub](https://img.shields.io/github/license/eracs/toy_jvm)![GitHub top language](https://img.shields.io/github/languages/top/eracs/toy_jvm)![GitHub last commit](https://img.shields.io/github/last-commit/eracs/toy_jvm)![GitHub contributors](https://img.shields.io/github/contributors/eracs/toy_jvm)![GitHub issues](https://img.shields.io/github/issues-raw/eracs/toy_jvm)
 -----------
-使用C++实现的JVM，使用Xmake构建，支持跨平台。JVM特性基于Java SE 8规范。
-
-## 动机
-
-
-----------
-
-- [ ] ~~通过实现JVM更好的去理解JVM~~
-- [x] 学习C++，与自己做对                
+使用C++实现的JVM，使用Xmake构建，支持跨平台。JVM特性基于Java SE 8规范。             
 
 ## 构建步骤
 
