@@ -28,6 +28,11 @@ std::shared_ptr<Attribute_Info> createAttributeInfo(const unsigned char *data, s
             u2 constantvalue_index = readNextU2(data, current_ptr, dataSize, status);
             return std::make_shared<ConstantValue_attribute>(attributeName, attribute_length, cpItems[constantvalue_index]);
         }
+        // if (attributeName == "SourceFile")
+        // {
+        //     u2 sourcefile_index = readNextU2(data, current_ptr, dataSize, status);
+        //     return std::make_shared<SourceFile_attribute>(attributeName, attribute_length, cpItems[sourcefile_index]);
+        // }
     }
     current_ptr += attribute_length;
     std::shared_ptr<Attribute_Info> empty(nullptr);
